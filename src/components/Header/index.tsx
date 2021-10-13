@@ -4,19 +4,25 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import ArrowLeftIcon from '../../assets/icons/arrow-left.svg'
 import { RootStackParamList } from '../../pages/RootStackParams'
-import { Button, Container, Text } from './styles'
+import { Button, Container, Text, View } from './styles'
 
 type authScreenProp = NativeStackNavigationProp<RootStackParamList>
 
-export function Header() {
+interface HeaderProps {
+  title: string
+}
+
+export function Header({ title }: HeaderProps) {
   const navigation = useNavigation<authScreenProp>()
 
   return (
     <Container>
-      <Button onPress={() => navigation.navigate('Onboarding')}>
+      <Button onPress={() => navigation.goBack()}>
         <ArrowLeftIcon />
       </Button>
-      <Text>Sign Up</Text>
+      <View>
+        <Text>{title}</Text>
+      </View>
     </Container>
   )
 }

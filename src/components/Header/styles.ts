@@ -13,10 +13,14 @@ export const Container = styled.View`
   padding-left: 20px;
 `
 
-export const Text = styled.Text`
+export const View = styled.View`
   position: absolute;
-  left: 45%;
+  width: 100%;
+  align-items: center;
+  margin-left: 10px;
+`
 
+export const Text = styled.Text`
   line-height: 22px;
   font-size: 18px;
   font-family: ${fonts.semiBold};

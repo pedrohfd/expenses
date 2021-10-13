@@ -69,10 +69,10 @@ export function Onboarding() {
         inactiveDotScale={0.5}
       />
       <SignUpButton onPress={() => navigation.navigate('SignUp')}>
-        <SignUpButtonText>Sign Up</SignUpButtonText>
+        <SignUpButtonText>Cadastro</SignUpButtonText>
       </SignUpButton>
 
-      <LoginButton>
+      <LoginButton onPress={() => navigation.navigate('Login')}>
         <LoginButtonText>Login</LoginButtonText>
       </LoginButton>
     </Container>
