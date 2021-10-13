@@ -3,4 +3,6 @@ export type RootStackParamList = {
   SignUp: undefined
   PrivacyAndPolice: undefined
   Login: undefined
+  ForgotPassword: undefined
+  EmailSend: undefined
 }

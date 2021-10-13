@@ -61,7 +61,7 @@ export function Login() {
         <LoginGoogleButtonText>Login com Google</LoginGoogleButtonText>
       </LoginGoogleButton>
 
-      <ForgotButton>
+      <ForgotButton onPress={() => navigation.navigate('ForgotPassword')}>
         <ForgotButtonText>Esqueceu a senha?</ForgotButtonText>
       </ForgotButton>
 

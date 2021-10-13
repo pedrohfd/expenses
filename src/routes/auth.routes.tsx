@@ -1,5 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React from 'react'
+import { EmailSend } from '../pages/EmailSend'
+import { ForgotPassword } from '../pages/ForgotPassword'
 import { Login } from '../pages/Login'
 
 import { Onboarding } from '../pages/Onboarding'
@@ -19,6 +21,8 @@ export function AuthRoutes() {
         component={PrivacyAndPolice}
       />
       <StackRoutes.Screen name='Login' component={Login} />
+      <StackRoutes.Screen name='ForgotPassword' component={ForgotPassword} />
+      <StackRoutes.Screen name='EmailSend' component={EmailSend} />
     </StackRoutes.Navigator>
   )
 }

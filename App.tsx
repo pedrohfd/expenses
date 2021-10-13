@@ -9,6 +9,9 @@ import {
 } from '@expo-google-fonts/inter'
 import { Routes } from './src/routes'
 import { NavigationContainer } from '@react-navigation/native'
+import * as Linking from 'expo-linking'
+
+const prefix = Linking.makeUrl('/')
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -19,8 +22,17 @@ export default function App() {
 
   if (!fontsLoaded) return <AppLoading />
 
+  const linking = {
+    prefixes: [prefix],
+    config: {
+      screens: {
+        ForgotPassword: 'forgot',
+      },
+    },
+  }
+
   return (
-    <NavigationContainer>
+    <NavigationContainer linking={linking}>
       <Routes />
     </NavigationContainer>
   )
