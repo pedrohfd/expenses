@@ -6,6 +6,7 @@ import { Login } from '../pages/Login'
 
 import { Onboarding } from '../pages/Onboarding'
 import { PrivacyAndPolice } from '../pages/PrivacyAndPolice'
+import { ResetPassword } from '../pages/ResetPassword'
 import { RootStackParamList } from '../pages/RootStackParams'
 import { SignUp } from '../pages/SignUp'
 
@@ -23,6 +24,7 @@ export function AuthRoutes() {
       <StackRoutes.Screen name='Login' component={Login} />
       <StackRoutes.Screen name='ForgotPassword' component={ForgotPassword} />
       <StackRoutes.Screen name='EmailSend' component={EmailSend} />
+      <StackRoutes.Screen name='ResetPassword' component={ResetPassword} />
     </StackRoutes.Navigator>
   )
 }

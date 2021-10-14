@@ -26,7 +26,7 @@ export default function App() {
     prefixes: [prefix],
     config: {
       screens: {
-        ForgotPassword: 'forgot',
+        ResetPassword: 'reset',
       },
     },
   }
