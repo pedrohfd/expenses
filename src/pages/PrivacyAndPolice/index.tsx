@@ -2,12 +2,13 @@ import React from 'react'
 import { ScrollView } from 'react-native'
 
 import { Header } from '../../components/Header'
+import { colors } from '../../styles/colors'
 import { Container, Content, ContentArea, Title } from './styles'
 
 export function PrivacyAndPolice() {
   return (
     <Container>
-      <Header title='Política de Privacidade' />
+      <Header title='Política de Privacidade' color={colors.light_100} />
       <ScrollView>
         <ContentArea>
           <Title>Política de Privacidade</Title>

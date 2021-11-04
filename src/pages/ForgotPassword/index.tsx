@@ -2,7 +2,7 @@ import React from 'react'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { Header } from '../../components/Header'
-import { RootStackParamList } from '../RootStackParams'
+import { AuthStackParamList } from '../RootStackParams'
 import {
   Container,
   ContinueButton,
@@ -11,8 +11,9 @@ import {
   PrimaryText,
 } from './styles'
 import { useNavigation } from '@react-navigation/core'
+import { colors } from '../../styles/colors'
 
-type authScreenProp = NativeStackNavigationProp<RootStackParamList>
+type authScreenProp = NativeStackNavigationProp<AuthStackParamList>
 
 export function ForgotPassword() {
   const navigation = useNavigation<authScreenProp>()
@@ -23,7 +24,7 @@ export function ForgotPassword() {
 
   return (
     <Container>
-      <Header title='Esqueceu a Senha' />
+      <Header title='Esqueceu a Senha' color={colors.light_100} />
 
       <PrimaryText>
         Não se preocupe.{'\n'}Coloque seu email e nós iremos enviar a você um

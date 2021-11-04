@@ -1,5 +1,6 @@
 import React from 'react'
 import { Header } from '../../components/Header'
+import { colors } from '../../styles/colors'
 import {
   Container,
   ContinueButton,
@@ -11,7 +12,7 @@ import {
 export function ResetPassword() {
   return (
     <Container>
-      <Header title='Redefinir Senha' />
+      <Header title='Redefinir Senha' color={colors.light_100} />
 
       <PasswordInput placeholder='Nova senha' />
 

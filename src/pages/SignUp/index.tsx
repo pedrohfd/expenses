@@ -3,7 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useNavigation } from '@react-navigation/core'
 
 import { Header } from '../../components/Header'
-import { RootStackParamList } from '../RootStackParams'
+import { AuthStackParamList } from '../RootStackParams'
 import {
   Container,
   EmailInput,
@@ -30,8 +30,9 @@ import {
   PrivacyButtonArea,
   PrivacyUpperButtonArea,
 } from './styles'
+import { colors } from '../../styles/colors'
 
-type authScreenProp = NativeStackNavigationProp<RootStackParamList>
+type authScreenProp = NativeStackNavigationProp<AuthStackParamList>
 
 export function SignUp() {
   const [isPasswordShown, setIsPasswordShown] = useState(false)
@@ -48,7 +49,7 @@ export function SignUp() {
 
   return (
     <Container>
-      <Header title='Cadastro' />
+      <Header title='Cadastro' color={colors.light_100} />
 
       <NameInput placeholder='Nome' />
 

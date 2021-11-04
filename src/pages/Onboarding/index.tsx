@@ -17,9 +17,9 @@ import {
 } from '../../components/CarouselItem'
 import { colors } from '../../styles/colors'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { RootStackParamList } from '../RootStackParams'
+import { AuthStackParamList } from '../RootStackParams'
 
-type authScreenProp = NativeStackNavigationProp<RootStackParamList>
+type authScreenProp = NativeStackNavigationProp<AuthStackParamList>
 
 export function Onboarding() {
   const [index, setIndex] = useState<number>(0)

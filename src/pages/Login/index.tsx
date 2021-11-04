@@ -3,7 +3,8 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { useState } from 'react'
 
 import { Header } from '../../components/Header'
-import { RootStackParamList } from '../RootStackParams'
+import { colors } from '../../styles/colors'
+import { AuthStackParamList } from '../RootStackParams'
 import {
   ComplementText,
   Container,
@@ -25,7 +26,7 @@ import {
   SignUpPageTextArea,
 } from './styles'
 
-type authScreenProp = NativeStackNavigationProp<RootStackParamList>
+type authScreenProp = NativeStackNavigationProp<AuthStackParamList>
 
 export function Login() {
   const navigation = useNavigation<authScreenProp>()
@@ -37,7 +38,7 @@ export function Login() {
 
   return (
     <Container>
-      <Header title='Login' />
+      <Header title='Login' color={colors.light_100} />
 
       <EmailInput placeholder='Email' />
 

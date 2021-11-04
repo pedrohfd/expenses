@@ -1,7 +1,7 @@
 import React from 'react'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-import { RootStackParamList } from '../RootStackParams'
+import { AuthStackParamList } from '../RootStackParams'
 import {
   BackButton,
   BackButtonText,
@@ -16,7 +16,7 @@ interface EmailSendProps {
   email: string
 }
 
-type authScreenProp = NativeStackNavigationProp<RootStackParamList>
+type authScreenProp = NativeStackNavigationProp<AuthStackParamList>
 
 export function EmailSend({ email }: EmailSendProps) {
   const navigation = useNavigation<authScreenProp>()

@@ -2,8 +2,29 @@ import styled from 'styled-components/native'
 import { colors } from '../../styles/colors'
 import fonts from '../../styles/fonts'
 
-export const Container = styled.View`
-  background: #ffffff;
+interface HeaderProps {
+  color: string
+}
+
+const color = {
+  violet: colors.violet_100,
+  light: colors.light_100,
+  red: colors.red_100,
+  blue: colors.blue_100,
+  green: colors.green_100,
+}
+
+export const Container = styled.View<HeaderProps>`
+  background: ${props =>
+    props.color === color.violet
+      ? colors.violet_100
+      : props.color === color.light
+      ? colors.light_100
+      : props.color === color.blue
+      ? colors.blue_100
+      : props.color === color.green
+      ? colors.green_100
+      : colors.red_100};
 
   flex-direction: row;
 

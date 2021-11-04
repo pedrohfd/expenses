@@ -1,4 +1,4 @@
-export type RootStackParamList = {
+export type AuthStackParamList = {
   Onboarding: undefined
   SignUp: undefined
   PrivacyAndPolice: undefined
@@ -6,4 +6,8 @@ export type RootStackParamList = {
   ForgotPassword: undefined
   EmailSend: undefined
   ResetPassword: undefined
+}
+
+export type AppStackParamList = {
+  PinSetup: undefined
 }
