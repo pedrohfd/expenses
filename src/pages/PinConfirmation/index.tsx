@@ -1,58 +1,41 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState } from 'react'
 import PincodeInput from 'react-native-pincode-input'
 import { set, ref } from 'firebase/database'
 import uuid from 'react-native-uuid'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { useNavigation } from '@react-navigation/core'
 
 import database from '../../config'
-import ArrowLeft from '../../assets/icons/white-arrow-left.svg'
-import ArrowRight from '../../assets/icons/arrow-right.svg'
-import { Header } from '../../components/Header'
 import { colors } from '../../styles/colors'
+import { Header } from '../../components/Header'
+import ArrowRight from '../../assets/icons/arrow-right.svg'
+import ArrowLeft from '../../assets/icons/white-arrow-left.svg'
 import { Button, ButtonArea, ButtonText, Container, Title } from './styles'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { AppStackParamList } from '../RootStackParams'
 
-type appScreenProp = NativeStackNavigationProp<AppStackParamList>
-
-export function PinSetup() {
+export function PinConfirmation() {
   const [code, setCode] = useState('')
-  const [pinFilled, setPinFilled] = useState(false)
   const pinRef = useRef(null)
   const uid = String(uuid.v4())
-  const navigation = useNavigation<appScreenProp>()
 
   async function writeUserData() {
-    try {
-      if (pinFilled) {
-        await set(ref(database, 'PinCode/' + uid), {
-          code: code,
-        })
-
-        await AsyncStorage.setItem('@expense_uid', uid)
-
-        navigation.navigate('PinConfirmation')
-      } else {
-        alert('O pin precisa ter 4 digitos.')
-      }
-    } catch (e) {
-      alert(e)
-    }
+    // try {
+    //   await set(ref(database, 'PinCode/' + uid), {
+    //     code: code,
+    //   })
+    //   await AsyncStorage.setItem('@expense_uid', uid)
+    // } catch (e) {
+    //   alert(e)
+    // }
   }
 
   function handlePress(key: string) {
     if (code.length < 4) {
       setCode(code + key)
-      if (code.length === 3) {
-        setPinFilled(true)
-      }
     }
   }
 
   return (
     <Container>
-      <Title>Vamos configurar o seu PIN</Title>
+      <Title>Ok. Digite seu PIN novamente.</Title>
 
       <PincodeInput
         ref={pinRef}
@@ -105,7 +88,6 @@ export function PinSetup() {
         <Button
           onPress={() => {
             setCode(code.slice(0, -1))
-            setPinFilled(false)
           }}
         >
           <ArrowLeft width={50} height={50} />

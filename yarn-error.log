@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add @types/expo-linking
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add @types/react-native-awesome-pin
 
 PATH: 
-  C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\ProgramData\chocolatey\bin;C:\Program Files\OpenJDK\openjdk-11.0.11_9\bin;C:\Program Files (x86)\Yarn\bin\;C:\Android\Sdk\emulator;C:\Android\Sdk\tools;C:\Android\Sdk\tools\bin;C:\Android\Sdk\platform-tools;C:\Users\pedro\AppData\Local\Yarn\bin;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files\dotnet\;C:\Users\pedro\scoop\shims;C:\Users\pedro\AppData\Local\Microsoft\WindowsApps;C:\Users\pedro\AppData\Local\Yarn\bin;C:\Users\pedro\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\pedro\AppData\Local\GitHubDesktop\bin;C:\Users\pedro\AppData\Roaming\npm;C:\Users\pedro\.dotnet\tools
+  C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\ProgramData\chocolatey\bin;C:\Program Files\OpenJDK\openjdk-11.0.11_9\bin;C:\Program Files (x86)\Yarn\bin\;C:\Android\Sdk\emulator;C:\Android\Sdk\tools;C:\Android\Sdk\tools\bin;C:\Android\Sdk\platform-tools;C:\Users\pedro\AppData\Local\Yarn\bin;C:\Program Files\nodejs\;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Users\pedro\scoop\shims;C:\Users\pedro\AppData\Local\Microsoft\WindowsApps;C:\Users\pedro\AppData\Local\Yarn\bin;C:\Users\pedro\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\pedro\AppData\Local\GitHubDesktop\bin;C:\Users\pedro\AppData\Roaming\npm;C:\Users\pedro\.dotnet\tools
 
 Yarn version: 
   1.22.5
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2fexpo-linking: Not found
+  Error: https://registry.yarnpkg.com/@types%2freact-native-awesome-pin: Not found
       at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:66097:18)
       at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:140749:22)
       at Request.emit (events.js:400:28)
@@ -53,6 +53,8 @@ npm manifest:
       "react": "16.13.1",
       "react-dom": "16.13.1",
       "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
+      "react-native-awesome-pin": "^1.3.2",
+      "react-native-keychain": "^8.0.0",
       "react-native-modal": "^13.0.0",
       "react-native-safe-area-context": "3.2.0",
       "react-native-screens": "~3.4.0",
@@ -5849,7 +5851,7 @@ Lockfile:
     dependencies:
       asap "~2.0.6"
   
-  prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+  prop-types@^15.5.10, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
     version "15.7.2"
     resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
     integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -5969,6 +5971,24 @@ Lockfile:
     integrity sha512-2ckIxZQAsvWn25Ho+DK3d1mXIgj7tITkrS4pYDvx96WyOttSvzzFeQnM2od0+FUMzILbdHDsDEqZvnz1DYNQ1w==
     dependencies:
       prop-types "^15.7.2"
+  
+  react-native-awesome-pin@^1.3.2:
+    version "1.3.2"
+    resolved "https://registry.yarnpkg.com/react-native-awesome-pin/-/react-native-awesome-pin-1.3.2.tgz#893c11882bcf0b01ae0555f95bcdd8331c883f2d"
+    integrity sha512-r68+VMav+M9ecOtwblGJpbL8HsCOx33ZKWIpTFAP2mY0pD4Op/h92EhwyzLqPwXq+LvP3x/mZzdPZjbdQlXxrQ==
+    dependencies:
+      react-native-material-ripple "git+https://github.com/lukebrandonfarrell/react-native-material-ripple.git"
+  
+  react-native-keychain@^8.0.0:
+    version "8.0.0"
+    resolved "https://registry.yarnpkg.com/react-native-keychain/-/react-native-keychain-8.0.0.tgz#ff708e4dc2a5440df717179bf9b7cd50f78b61d7"
+    integrity sha512-c7Cs+YQN26UaQsRG1dmlXL7VL2ctnXwH/dl0IOMEQ7ZaL2NdN313YSAI8ZEZZjrVhNmPsyWEuvTFqWrdpItqQg==
+  
+  "react-native-material-ripple@git+https://github.com/lukebrandonfarrell/react-native-material-ripple.git":
+    version "0.8.0"
+    resolved "git+https://github.com/lukebrandonfarrell/react-native-material-ripple.git#b9a24a5891f4fada9510f0e289b53bd8d9e4f6b8"
+    dependencies:
+      prop-types "^15.5.10"
   
   react-native-modal@^13.0.0:
     version "13.0.0"

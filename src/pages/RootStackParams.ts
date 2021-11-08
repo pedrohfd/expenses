@@ -10,4 +10,5 @@ export type AuthStackParamList = {
 
 export type AppStackParamList = {
   PinSetup: undefined
+  PinConfirmation: undefined
 }
