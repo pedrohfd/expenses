@@ -1,6 +1,6 @@
 {
   "expo": {
-    "scheme": "myapp",
+    "scheme": "expenses",
     "name": "expenses",
     "slug": "expenses",
     "version": "1.0.0",

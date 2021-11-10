@@ -10,6 +10,8 @@ import {
 import { Routes } from './src/routes'
 import { NavigationContainer } from '@react-navigation/native'
 import * as Linking from 'expo-linking'
+import AuthProvider from './src/context/auth'
+import { StatusBar } from 'expo-status-bar'
 
 const prefix = Linking.makeUrl('/')
 
@@ -33,7 +35,12 @@ export default function App() {
 
   return (
     <NavigationContainer linking={linking}>
-      <Routes />
+      <AuthProvider>
+        <>
+          <StatusBar style='auto' />
+          <Routes />
+        </>
+      </AuthProvider>
     </NavigationContainer>
   )
 }

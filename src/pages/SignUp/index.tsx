@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useNavigation } from '@react-navigation/core'
 
@@ -31,13 +31,19 @@ import {
   PrivacyUpperButtonArea,
 } from './styles'
 import { colors } from '../../styles/colors'
+import { AuthContext } from '../../context/auth'
 
 type authScreenProp = NativeStackNavigationProp<AuthStackParamList>
 
 export function SignUp() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [name, setName] = useState('')
+
+  const navigation = useNavigation<authScreenProp>()
+  const { signUp, signUpWithGoogle } = useContext(AuthContext)
   const [isPasswordShown, setIsPasswordShown] = useState(false)
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false)
-  const navigation = useNavigation<authScreenProp>()
 
   function handlePasswordShown() {
     setIsPasswordShown(!isPasswordShown)
@@ -47,16 +53,32 @@ export function SignUp() {
     setIsCheckboxChecked(!isCheckboxChecked)
   }
 
+  async function handleSignUp() {
+    let user = { email, password, name }
+
+    if (name && email && password && isCheckboxChecked) {
+      await signUp(user)
+    }
+  }
+
+  async function handleSignUpWithGoogle() {
+    await signUpWithGoogle()
+  }
+
   return (
     <Container>
       <Header title='Cadastro' color={colors.light_100} />
 
-      <NameInput placeholder='Nome' />
+      <NameInput placeholder='Nome' onChangeText={text => setName(text)} />
 
-      <EmailInput placeholder='Email' />
+      <EmailInput placeholder='Email' onChangeText={text => setEmail(text)} />
 
       <PasswordInputArea>
-        <PasswordInput placeholder='Senha' secureTextEntry={!isPasswordShown} />
+        <PasswordInput
+          placeholder='Senha'
+          secureTextEntry={!isPasswordShown}
+          onChangeText={text => setPassword(text)}
+        />
 
         <ShowButton onPress={handlePasswordShown}>
           <ShowIcon />
@@ -91,13 +113,13 @@ export function SignUp() {
         </PrivacyButtonArea>
       </PrivacyArea>
 
-      <SignUpButton>
+      <SignUpButton onPress={handleSignUp}>
         <SignUpButtonText>Cadastrar</SignUpButtonText>
       </SignUpButton>
 
       <ComplementText>Ou com</ComplementText>
 
-      <SignUpGoogleButton>
+      <SignUpGoogleButton onPress={handleSignUpWithGoogle}>
         <GoogleIcon />
 
         <SignUpGoogleButtonText>Cadastrar com Google</SignUpGoogleButtonText>

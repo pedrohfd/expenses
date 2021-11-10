@@ -1,5 +1,4 @@
-import { getDatabase } from '@firebase/database'
-import { initializeApp } from 'firebase/app'
+import firebase from 'firebase'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAKC8pPRNVEoJxsZo42pkDUqJNy2uojhKU',
@@ -11,7 +10,15 @@ const firebaseConfig = {
   appId: '1:1089981809202:web:f846a5558de91f7e75b22b',
 }
 
-const app = initializeApp(firebaseConfig)
-const database = getDatabase(app)
+let app
 
-export default database
+if (firebase.apps.length === 0) {
+  app = firebase.initializeApp(firebaseConfig)
+} else {
+  app = firebase.app()
+}
+
+const auth = firebase.auth()
+const database = firebase.database()
+
+export { auth, database }

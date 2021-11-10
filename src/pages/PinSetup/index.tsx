@@ -1,36 +1,29 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState, useContext } from 'react'
 import PincodeInput from 'react-native-pincode-input'
-import { set, ref } from 'firebase/database'
-import uuid from 'react-native-uuid'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/core'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { MotiView } from 'moti'
 
-import database from '../../config'
 import ArrowLeft from '../../assets/icons/white-arrow-left.svg'
 import ArrowRight from '../../assets/icons/arrow-right.svg'
-import { Header } from '../../components/Header'
 import { colors } from '../../styles/colors'
 import { Button, ButtonArea, ButtonText, Container, Title } from './styles'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { AppStackParamList } from '../RootStackParams'
+import { AuthContext } from '../../context/auth'
 
 type appScreenProp = NativeStackNavigationProp<AppStackParamList>
 
 export function PinSetup() {
   const [code, setCode] = useState('')
   const [pinFilled, setPinFilled] = useState(false)
-  const pinRef = useRef(null)
-  const uid = String(uuid.v4())
+  var pinRef = useRef(null)
   const navigation = useNavigation<appScreenProp>()
+  const { setPin } = useContext(AuthContext)
 
   async function writeUserData() {
     try {
       if (pinFilled) {
-        await set(ref(database, 'PinCode/' + uid), {
-          code: code,
-        })
-
-        await AsyncStorage.setItem('@expense_uid', uid)
+        setPin(code)
 
         navigation.navigate('PinConfirmation')
       } else {
@@ -54,8 +47,14 @@ export function PinSetup() {
     <Container>
       <Title>Vamos configurar o seu PIN</Title>
 
+      <MotiView
+        from={{ opacity: 0 }}
+        animate={{ opacity: 0 }}
+        transition={{ type: 'timing' }}
+      />
+
       <PincodeInput
-        ref={pinRef}
+        ref={(pincodeInput: any) => (pinRef = pincodeInput)}
         length={4}
         pin={code}
         onTextChange={handlePress}

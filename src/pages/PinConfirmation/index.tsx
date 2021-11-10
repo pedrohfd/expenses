@@ -1,35 +1,37 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useContext } from 'react'
 import PincodeInput from 'react-native-pincode-input'
-import { set, ref } from 'firebase/database'
-import uuid from 'react-native-uuid'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-import database from '../../config'
 import { colors } from '../../styles/colors'
-import { Header } from '../../components/Header'
+import { AuthContext } from '../../context/auth'
 import ArrowRight from '../../assets/icons/arrow-right.svg'
 import ArrowLeft from '../../assets/icons/white-arrow-left.svg'
 import { Button, ButtonArea, ButtonText, Container, Title } from './styles'
 
 export function PinConfirmation() {
   const [code, setCode] = useState('')
+  const [pinFilled, setPinFilled] = useState(false)
   const pinRef = useRef(null)
-  const uid = String(uuid.v4())
+  const { pin, savePin } = useContext(AuthContext)
 
   async function writeUserData() {
-    // try {
-    //   await set(ref(database, 'PinCode/' + uid), {
-    //     code: code,
-    //   })
-    //   await AsyncStorage.setItem('@expense_uid', uid)
-    // } catch (e) {
-    //   alert(e)
-    // }
+    try {
+      if (pinFilled) {
+        if (pin === code) {
+          savePin()
+        }
+      }
+    } catch (e) {
+      alert(e)
+    }
   }
 
   function handlePress(key: string) {
     if (code.length < 4) {
       setCode(code + key)
+      if (code.length === 3) {
+        setPinFilled(true)
+      }
     }
   }
 
