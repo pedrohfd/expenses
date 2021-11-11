@@ -11,7 +11,7 @@ import { Button, ButtonArea, ButtonText, Container, Title } from './styles'
 export function PinConfirmation() {
   const [code, setCode] = useState('')
   const [pinFilled, setPinFilled] = useState(false)
-  const pinRef = useRef(null)
+  var pinRef = useRef(null)
   const { pin, savePin } = useContext(AuthContext)
 
   async function writeUserData() {
@@ -20,6 +20,8 @@ export function PinConfirmation() {
         if (pin === code) {
           savePin()
         }
+      } else {
+        pinRef.shake()
       }
     } catch (e) {
       alert(e)
@@ -40,7 +42,7 @@ export function PinConfirmation() {
       <Title>Ok. Digite seu PIN novamente.</Title>
 
       <PincodeInput
-        ref={pinRef}
+        ref={(pincodeInput: any) => (pinRef = pincodeInput)}
         length={4}
         pin={code}
         onTextChange={handlePress}

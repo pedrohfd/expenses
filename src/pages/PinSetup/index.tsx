@@ -1,8 +1,8 @@
 import React, { useRef, useState, useContext } from 'react'
+import { LogBox } from 'react-native'
 import PincodeInput from 'react-native-pincode-input'
 import { useNavigation } from '@react-navigation/core'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { MotiView } from 'moti'
 
 import ArrowLeft from '../../assets/icons/white-arrow-left.svg'
 import ArrowRight from '../../assets/icons/arrow-right.svg'
@@ -12,6 +12,8 @@ import { AppStackParamList } from '../RootStackParams'
 import { AuthContext } from '../../context/auth'
 
 type appScreenProp = NativeStackNavigationProp<AppStackParamList>
+
+LogBox.ignoreAllLogs()
 
 export function PinSetup() {
   const [code, setCode] = useState('')
@@ -27,7 +29,8 @@ export function PinSetup() {
 
         navigation.navigate('PinConfirmation')
       } else {
-        alert('O pin precisa ter 4 digitos.')
+        pinRef.shake()
+        setCode('')
       }
     } catch (e) {
       alert(e)
@@ -46,12 +49,6 @@ export function PinSetup() {
   return (
     <Container>
       <Title>Vamos configurar o seu PIN</Title>
-
-      <MotiView
-        from={{ opacity: 0 }}
-        animate={{ opacity: 0 }}
-        transition={{ type: 'timing' }}
-      />
 
       <PincodeInput
         ref={(pincodeInput: any) => (pinRef = pincodeInput)}
