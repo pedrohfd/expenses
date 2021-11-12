@@ -37,7 +37,7 @@ export default function App() {
     <NavigationContainer linking={linking}>
       <AuthProvider>
         <>
-          <StatusBar style='auto' />
+          <StatusBar style='light' />
           <Routes />
         </>
       </AuthProvider>

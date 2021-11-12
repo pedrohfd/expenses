@@ -12,7 +12,11 @@ import {
 export function ResetPassword() {
   return (
     <Container>
-      <Header title='Redefinir Senha' color={colors.light_100} />
+      <Header
+        title='Redefinir Senha'
+        color={colors.light_100}
+        textColor={colors.dark_50}
+      />
 
       <PasswordInput placeholder='Nova senha' />
 

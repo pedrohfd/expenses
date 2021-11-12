@@ -11,4 +11,8 @@ export type AuthStackParamList = {
 export type AppStackParamList = {
   PinSetup: undefined
   PinConfirmation: undefined
+  SetupAccount: undefined
+  AddNewAccount: undefined
+  Success: undefined
+  Home: undefined
 }

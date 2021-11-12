@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { useNavigation } from '@react-navigation/core'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { StackNavigationProp } from '@react-navigation/stack'
 
 import { Header } from '../../components/Header'
 import { colors } from '../../styles/colors'
@@ -27,7 +27,7 @@ import {
 } from './styles'
 import { AuthContext } from '../../context/auth'
 
-type authScreenProp = NativeStackNavigationProp<AuthStackParamList>
+type authScreenProp = StackNavigationProp<AuthStackParamList>
 
 export function Login() {
   const navigation = useNavigation<authScreenProp>()
@@ -41,7 +41,7 @@ export function Login() {
   }
 
   async function handleSignIn() {
-    let user = { email, password }
+    let user = { email, password, name: '', pin: '', uid: '', accountType: '' }
 
     if (email && password) {
       await signIn(user)
@@ -54,7 +54,11 @@ export function Login() {
 
   return (
     <Container>
-      <Header title='Login' color={colors.light_100} />
+      <Header
+        title='Login'
+        color={colors.light_100}
+        textColor={colors.dark_50}
+      />
 
       <EmailInput placeholder='Email' onChangeText={text => setEmail(text)} />
 

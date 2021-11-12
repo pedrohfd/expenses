@@ -2,7 +2,7 @@ import React, { useRef, useState, useContext } from 'react'
 import { LogBox } from 'react-native'
 import PincodeInput from 'react-native-pincode-input'
 import { useNavigation } from '@react-navigation/core'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { StackNavigationProp } from '@react-navigation/stack'
 
 import ArrowLeft from '../../assets/icons/white-arrow-left.svg'
 import ArrowRight from '../../assets/icons/arrow-right.svg'
@@ -11,7 +11,7 @@ import { Button, ButtonArea, ButtonText, Container, Title } from './styles'
 import { AppStackParamList } from '../RootStackParams'
 import { AuthContext } from '../../context/auth'
 
-type appScreenProp = NativeStackNavigationProp<AppStackParamList>
+type appScreenProp = StackNavigationProp<AppStackParamList>
 
 LogBox.ignoreAllLogs()
 

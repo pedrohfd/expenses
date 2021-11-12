@@ -41,12 +41,17 @@ export const View = styled.View`
   margin-left: 10px;
 `
 
-export const Text = styled.Text`
+interface TextColorProp {
+  textColor: string
+}
+
+export const Text = styled.Text<TextColorProp>`
   line-height: 22px;
   font-size: 18px;
   font-family: ${fonts.semiBold};
 
-  color: ${colors.dark_50};
+  color: ${props =>
+    props.textColor === colors.dark_50 ? colors.dark_50 : colors.light_100};
 `
 
 export const Button = styled.TouchableOpacity``

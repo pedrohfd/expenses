@@ -12,12 +12,8 @@ interface User {
   password: string
   name: string
   uid: string
-}
-
-interface UserProps {
-  email: string
-  password: string
-  name?: string
+  pin: string
+  accountType: string
 }
 
 interface UserCredentials {
@@ -26,14 +22,16 @@ interface UserCredentials {
 
 interface AuthContextProps {
   signed: boolean
-  user: UserProps | null
+  isPinSet: boolean
+  user: User | null
   pin: string
   setPin: (state: string) => void
-  signUp: ({ email, password, name }: UserProps) => {}
+  signUp: ({ email, password, name }: User) => {}
   signUpWithGoogle(): Promise<void>
-  signIn: ({ email, password }: UserProps) => {}
+  signIn: ({ email, password }: User) => {}
   signInWithGoogle(): Promise<void>
   savePin: () => {}
+  saveAccountType: (accountType: string) => {}
 }
 
 interface ContextProps {
@@ -72,6 +70,8 @@ function AuthProvider({ children }: ContextProps) {
             name: snapshot.val().name,
             email: snapshot.val().email,
             password: snapshot.val().password,
+            pin: snapshot.val().pin,
+            accountType: snapshot.val().bank,
           }
 
           setUser(data)
@@ -79,7 +79,15 @@ function AuthProvider({ children }: ContextProps) {
     }
 
     loadStorage()
-  }, [])
+  }, [user])
+
+  async function saveAccountType(accountType: string) {
+    const { uid } = user as User
+
+    await database.ref('users').child(uid).update({
+      accountType: accountType,
+    })
+  }
 
   async function savePin() {
     const { uid } = user as User
@@ -93,7 +101,7 @@ function AuthProvider({ children }: ContextProps) {
     await AsyncStorage.setItem('@expenses_user_uid', data)
   }
 
-  async function signIn({ email, password }: UserProps) {
+  async function signIn({ email, password }: User) {
     try {
       await auth
         .signInWithEmailAndPassword(email, password)
@@ -110,6 +118,8 @@ function AuthProvider({ children }: ContextProps) {
                 name: snapshot.val().name,
                 email: email,
                 password: password,
+                pin: snapshot.val().pin,
+                accountType: snapshot.val().bank,
               }
 
               setUser(data)
@@ -160,6 +170,8 @@ function AuthProvider({ children }: ContextProps) {
                   name: snapshot.val().name,
                   email: email,
                   password: password,
+                  pin: snapshot.val().pin,
+                  accountType: snapshot.val().bank,
                 }
 
                 setUser(data)
@@ -172,7 +184,7 @@ function AuthProvider({ children }: ContextProps) {
     }
   }
 
-  async function signUp({ email, password, name }: UserProps) {
+  async function signUp({ email, password, name }: User) {
     try {
       await auth
         .createUserWithEmailAndPassword(email, password)
@@ -242,6 +254,7 @@ function AuthProvider({ children }: ContextProps) {
     <AuthContext.Provider
       value={{
         signed: !!user,
+        isPinSet: !!user?.pin,
         user,
         pin,
         setPin,
@@ -250,6 +263,7 @@ function AuthProvider({ children }: ContextProps) {
         signIn,
         signInWithGoogle,
         savePin,
+        saveAccountType,
       }}
     >
       {children}

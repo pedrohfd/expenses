@@ -16,10 +16,10 @@ import {
   SLIDER_WIDTH,
 } from '../../components/CarouselItem'
 import { colors } from '../../styles/colors'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { StackNavigationProp } from '@react-navigation/stack'
 import { AuthStackParamList } from '../RootStackParams'
 
-type authScreenProp = NativeStackNavigationProp<AuthStackParamList>
+type authScreenProp = StackNavigationProp<AuthStackParamList>
 
 export function Onboarding() {
   const [index, setIndex] = useState<number>(0)

@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../context/auth'
 
-import { AppRoutes } from './app.routes'
+import { AppRoutes, PinRoutes } from './app.routes'
 import { AuthRoutes } from './auth.routes'
 
 export function Routes() {
-  const { signed } = useContext(AuthContext)
+  const { signed, isPinSet } = useContext(AuthContext)
 
-  return !signed ? <AuthRoutes /> : <AppRoutes />
+  return !signed ? <AuthRoutes /> : isPinSet ? <AppRoutes /> : <PinRoutes />
 }

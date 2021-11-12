@@ -8,7 +8,11 @@ import { Container, Content, ContentArea, Title } from './styles'
 export function PrivacyAndPolice() {
   return (
     <Container>
-      <Header title='Política de Privacidade' color={colors.light_100} />
+      <Header
+        title='Política de Privacidade'
+        color={colors.light_100}
+        textColor={colors.dark_50}
+      />
       <ScrollView>
         <ContentArea>
           <Title>Política de Privacidade</Title>

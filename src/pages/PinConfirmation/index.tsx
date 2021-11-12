@@ -1,27 +1,31 @@
 import React, { useRef, useState, useContext } from 'react'
 import PincodeInput from 'react-native-pincode-input'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { colors } from '../../styles/colors'
 import { AuthContext } from '../../context/auth'
 import ArrowRight from '../../assets/icons/arrow-right.svg'
 import ArrowLeft from '../../assets/icons/white-arrow-left.svg'
 import { Button, ButtonArea, ButtonText, Container, Title } from './styles'
+import { useNavigation } from '@react-navigation/core'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { AppStackParamList } from '../RootStackParams'
+
+type appStackParams = StackNavigationProp<AppStackParamList>
 
 export function PinConfirmation() {
   const [code, setCode] = useState('')
   const [pinFilled, setPinFilled] = useState(false)
   var pinRef = useRef(null)
   const { pin, savePin } = useContext(AuthContext)
+  const navigation = useNavigation<appStackParams>()
 
   async function writeUserData() {
     try {
-      if (pinFilled) {
-        if (pin === code) {
-          savePin()
-        }
+      if (pinFilled && pin === code) {
+        savePin()
       } else {
         pinRef.shake()
+        setCode('')
       }
     } catch (e) {
       alert(e)

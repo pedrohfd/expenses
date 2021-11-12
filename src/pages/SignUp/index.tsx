@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { StackNavigationProp } from '@react-navigation/stack'
 import { useNavigation } from '@react-navigation/core'
 
 import { Header } from '../../components/Header'
@@ -33,7 +33,7 @@ import {
 import { colors } from '../../styles/colors'
 import { AuthContext } from '../../context/auth'
 
-type authScreenProp = NativeStackNavigationProp<AuthStackParamList>
+type authScreenProp = StackNavigationProp<AuthStackParamList>
 
 export function SignUp() {
   const [email, setEmail] = useState('')
@@ -54,7 +54,7 @@ export function SignUp() {
   }
 
   async function handleSignUp() {
-    let user = { email, password, name }
+    let user = { email, password, name, uid: '', pin: '', accountType: '' }
 
     if (name && email && password && isCheckboxChecked) {
       await signUp(user)
@@ -67,7 +67,11 @@ export function SignUp() {
 
   return (
     <Container>
-      <Header title='Cadastro' color={colors.light_100} />
+      <Header
+        title='Cadastro'
+        color={colors.light_100}
+        textColor={colors.dark_50}
+      />
 
       <NameInput placeholder='Nome' onChangeText={text => setName(text)} />
 
