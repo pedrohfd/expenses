@@ -12,7 +12,7 @@ export function SetupAccount() {
 
   return (
     <Container>
-      <StatusBar style='light' />
+      <StatusBar style='dark' />
 
       <Title>Vamos configurar sua conta!</Title>
 

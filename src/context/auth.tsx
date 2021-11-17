@@ -1,5 +1,5 @@
 import React, { ReactElement, useState, useEffect, createContext } from 'react'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { StackNavigationProp } from '@react-navigation/stack'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/core'
 import * as AuthSession from 'expo-auth-session'
@@ -23,6 +23,7 @@ interface UserCredentials {
 interface AuthContextProps {
   signed: boolean
   isPinSet: boolean
+  isAccountSet: boolean
   user: User | null
   pin: string
   setPin: (state: string) => void
@@ -45,7 +46,7 @@ interface GoogleSignResponse {
   type: string
 }
 
-type authScreenProp = NativeStackNavigationProp<AuthStackParamList>
+type authScreenProp = StackNavigationProp<AuthStackParamList>
 
 export const AuthContext = createContext({} as AuthContextProps)
 
@@ -71,7 +72,7 @@ function AuthProvider({ children }: ContextProps) {
             email: snapshot.val().email,
             password: snapshot.val().password,
             pin: snapshot.val().pin,
-            accountType: snapshot.val().bank,
+            accountType: snapshot.val().accountType,
           }
 
           setUser(data)
@@ -119,7 +120,7 @@ function AuthProvider({ children }: ContextProps) {
                 email: email,
                 password: password,
                 pin: snapshot.val().pin,
-                accountType: snapshot.val().bank,
+                accountType: snapshot.val().accountType,
               }
 
               setUser(data)
@@ -171,7 +172,7 @@ function AuthProvider({ children }: ContextProps) {
                   email: email,
                   password: password,
                   pin: snapshot.val().pin,
-                  accountType: snapshot.val().bank,
+                  accountType: snapshot.val().accountType,
                 }
 
                 setUser(data)
@@ -255,6 +256,7 @@ function AuthProvider({ children }: ContextProps) {
       value={{
         signed: !!user,
         isPinSet: !!user?.pin,
+        isAccountSet: !!user?.accountType,
         user,
         pin,
         setPin,

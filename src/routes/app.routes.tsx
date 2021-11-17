@@ -17,21 +17,6 @@ const StackRoutes = createStackNavigator<AppStackParamList>()
 export function AppRoutes() {
   return (
     <StackRoutes.Navigator screenOptions={{ headerShown: false }}>
-      <StackRoutes.Screen name='SetupAccount' component={SetupAccount} />
-      <StackRoutes.Screen
-        name='AddNewAccount'
-        component={AddNewAccount}
-        options={{
-          ...TransitionPresets.SlideFromRightIOS,
-        }}
-      />
-      <StackRoutes.Screen
-        name='Success'
-        component={Success}
-        options={{
-          ...TransitionPresets.SlideFromRightIOS,
-        }}
-      />
       <StackRoutes.Screen
         name='Home'
         component={Home}
@@ -52,6 +37,28 @@ export function PinRoutes() {
         component={PinConfirmation}
         options={{
           ...TransitionPresets.ModalFadeTransition,
+        }}
+      />
+    </StackRoutes.Navigator>
+  )
+}
+
+export function AccountRoutes() {
+  return (
+    <StackRoutes.Navigator screenOptions={{ headerShown: false }}>
+      <StackRoutes.Screen name='SetupAccount' component={SetupAccount} />
+      <StackRoutes.Screen
+        name='AddNewAccount'
+        component={AddNewAccount}
+        options={{
+          ...TransitionPresets.SlideFromRightIOS,
+        }}
+      />
+      <StackRoutes.Screen
+        name='Success'
+        component={Success}
+        options={{
+          ...TransitionPresets.SlideFromRightIOS,
         }}
       />
     </StackRoutes.Navigator>

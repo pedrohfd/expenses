@@ -6,3 +6,5 @@ declare module '*.svg' {
 }
 
 declare module 'react-native-pincode-input'
+
+declare module '@rainbow-me/animated-charts'
