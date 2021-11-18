@@ -148,24 +148,90 @@ export const ChartTitle = styled.Text`
 export const ChartFilterButtonArea = styled.View`
   flex-direction: row;
   padding-left: 16px;
-
   padding-right: 16px;
-  flex: 1;
-  /* width: ${Dimensions.get('screen').width};
-  height: 20px; */
+
+  align-items: center;
+
+  justify-content: space-around;
 `
 
-export const ChartFilterButton = styled.TouchableOpacity``
+export const ChartFilterButton = styled.TouchableOpacity`
+  justify-content: center;
+  align-items: center;
 
-export const ChartFilterButtonText = styled.Text``
+  height: 34px;
+  width: 90px;
+`
 
-export const AnimatedButton = styled(MotiPressable)`
+interface TextProps {
+  pressed: boolean
+}
+
+export const ChartFilterTodayButtonText = styled.Text<TextProps>`
+  color: ${props => (props.pressed ? colors.yellow_100 : colors.light_20)};
+  font-size: 14px;
+  font-family: ${props => (props.pressed ? fonts.bold : fonts.medium)};
+`
+
+export const ChartFilterWeekButtonText = styled.Text<TextProps>`
+  color: ${props => (props.pressed ? colors.yellow_100 : colors.light_20)};
+  font-size: 14px;
+  font-family: ${props => (props.pressed ? fonts.bold : fonts.medium)};
+`
+
+export const ChartFilterMonthButtonText = styled.Text<TextProps>`
+  color: ${props => (props.pressed ? colors.yellow_100 : colors.light_20)};
+  font-size: 14px;
+  font-family: ${props => (props.pressed ? fonts.bold : fonts.medium)};
+`
+
+export const ChartFilterYearButtonText = styled.Text<TextProps>`
+  color: ${props => (props.pressed ? colors.yellow_100 : colors.light_20)};
+  font-size: 14px;
+  font-family: ${props => (props.pressed ? fonts.bold : fonts.medium)};
+`
+
+export const AnimatedButton = styled(MotiView)`
   background: ${colors.yellow_20};
   height: 34px;
   width: 90px;
 
-  border-radius: 16px;
+  position: absolute;
 
-  justify-content: center;
+  border-radius: 16px;
+`
+
+export const TransactionTitleArea = styled.View`
+  flex-direction: row;
+  margin-top: 16px;
+  padding: 16px;
+
+  justify-content: space-between;
   align-items: center;
+`
+
+export const TransactionTitle = styled.Text`
+  font-size: 18px;
+  font-family: ${fonts.semiBold};
+
+  color: ${colors.dark_25};
+`
+
+export const TransactionButtonFilter = styled.TouchableOpacity`
+  height: 32px;
+  width: 78px;
+
+  border-radius: 40px;
+
+  background: ${colors.violet_20};
+
+  align-items: center;
+  justify-content: center;
+`
+
+export const TransactionButtonFilterText = styled.Text`
+  color: ${colors.violet_100};
+
+  font-size: 14px;
+  font-family: ${fonts.medium};
 `

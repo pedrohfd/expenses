@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Dimensions } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import { LineChart } from 'react-native-chart-kit'
-import { useMotiPressable } from '@motify/interactions'
-import { MotiView } from '@motify/components'
 
 import ExpensesIcon from '../../assets/icons/expenses.svg'
 import IncomeIcon from '../../assets/icons/income.svg'
@@ -16,7 +15,10 @@ import {
   ChartArea,
   ChartFilterButton,
   ChartFilterButtonArea,
-  ChartFilterButtonText,
+  ChartFilterMonthButtonText,
+  ChartFilterTodayButtonText,
+  ChartFilterWeekButtonText,
+  ChartFilterYearButtonText,
   ChartTitle,
   Container,
   Expenses,
@@ -33,50 +35,53 @@ import {
   MonthText,
   NotificationButton,
   Summary,
+  TransactionButtonFilter,
+  TransactionButtonFilterText,
+  TransactionTitle,
+  TransactionTitleArea,
 } from './styles'
-import { Dimensions } from 'react-native'
 import { colors } from '../../styles/colors'
+import { TransactionCardItem } from '../../components/TransactionCardItem'
 
-const data = [
+const todayLabels = ['12:00', '']
+
+const todayData = [150, 50, 30, 100]
+
+const weekLabels = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom']
+
+const weekData = [30, 100, 23, 65, 56, 100, 21]
+
+const monthData = [
   150, 50, 30, 100, 23, 65, 56, 100, 21, 23, 54, 47, 56, 126, 127, 92, 82, 53,
-  26, 36, 16,
+  26, 36, 16, 35, 52, 62, 94, 13, 63, 92, 16, 36,
 ]
 
+const yearLabels = ['Jan', 'Mar', 'Mai', 'Jul', 'Set', 'Nov']
+
+const yearData = [150, 50, 30, 100, 23, 65, 56, 100, 21, 23, 54, 47]
+
+let data = todayData
+
+let labels = todayLabels
+
 export function Home() {
-  const week = 90
-  const today = 0
+  const [from, setFrom] = useState(16)
+  const [animate, setAnimate] = useState(16)
+  const [buttonPressed, setButtonPressed] = useState({
+    today: true,
+    week: false,
+    month: false,
+    year: false,
+  })
 
-  function ChartButton() {
-    return (
-      <AnimatedButton
-        from={{
-          opacity: 0,
-        }}
-        animate={{
-          opacity: 1,
-        }}
-        transition={{
-          type: 'timing',
-          duration: 2000,
-        }}
-      >
-        <ChartFilterButtonText>Hoje</ChartFilterButtonText>
-      </AnimatedButton>
-    )
-  }
+  const today = 16
+  const week = 110
+  const month = 206
+  const year = 300
 
-  function Item() {
-    const state = useMotiPressable(({ pressed }) => {
-      'worklet'
-
-      return {
-        opacity: pressed ? 0 : 1,
-      }
-    })
-
-    return (
-      <MotiView state={state} style={{ backgroundColor: '#000', height: 10 }} />
-    )
+  function handleSelectedChart(animate: number) {
+    setFrom(animate)
+    setAnimate(animate)
   }
 
   return (
@@ -128,7 +133,7 @@ export function Home() {
           height={185}
           width={Dimensions.get('window').width + 21}
           data={{
-            labels: [''],
+            labels: labels,
             datasets: [
               {
                 data: data,
@@ -144,41 +149,108 @@ export function Home() {
           }}
           style={{
             paddingTop: 5,
-            paddingRight: 0,
+            // paddingRight: 10,
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
           fromZero
           withHorizontalLines={false}
-          withVerticalLines={false}
           withHorizontalLabels={false}
-          withVerticalLabels={false}
           withDots={true}
           bezier
         />
       </ChartArea>
 
       <ChartFilterButtonArea>
-        <MotiView
-          style={{
-            height: 34,
-            width: 90,
-            backgroundColor: colors.yellow_20,
-            position: 'absolute',
-          }}
+        <AnimatedButton
           from={{
-            translateX: 0,
+            translateX: from,
           }}
           animate={{
-            translateX: 100,
+            translateX: animate,
           }}
         />
-        <ChartFilterButton>
-          <ChartFilterButtonText>Hoje</ChartFilterButtonText>
+        <ChartFilterButton
+          onPress={() => {
+            data = todayData
+            labels = todayLabels
+            handleSelectedChart(today)
+            setButtonPressed({
+              today: true,
+              week: false,
+              month: false,
+              year: false,
+            })
+          }}
+        >
+          <ChartFilterTodayButtonText pressed={buttonPressed.today}>
+            Hoje
+          </ChartFilterTodayButtonText>
         </ChartFilterButton>
 
-        <ChartFilterButton>
-          <ChartFilterButtonText>Semana</ChartFilterButtonText>
+        <ChartFilterButton
+          onPress={() => {
+            data = weekData
+            labels = weekLabels
+            handleSelectedChart(week)
+            setButtonPressed({
+              today: false,
+              week: true,
+              month: false,
+              year: false,
+            })
+          }}
+        >
+          <ChartFilterWeekButtonText pressed={buttonPressed.week}>
+            Semana
+          </ChartFilterWeekButtonText>
+        </ChartFilterButton>
+
+        <ChartFilterButton
+          onPress={() => {
+            data = monthData
+            handleSelectedChart(month)
+            setButtonPressed({
+              today: false,
+              week: false,
+              month: true,
+              year: false,
+            })
+          }}
+        >
+          <ChartFilterMonthButtonText pressed={buttonPressed.month}>
+            Mês
+          </ChartFilterMonthButtonText>
+        </ChartFilterButton>
+
+        <ChartFilterButton
+          onPress={() => {
+            data = yearData
+            labels = yearLabels
+            handleSelectedChart(year)
+            setButtonPressed({
+              today: false,
+              week: false,
+              month: false,
+              year: true,
+            })
+          }}
+        >
+          <ChartFilterYearButtonText pressed={buttonPressed.year}>
+            Ano
+          </ChartFilterYearButtonText>
         </ChartFilterButton>
       </ChartFilterButtonArea>
+
+      <TransactionTitleArea>
+        <TransactionTitle>Transações Recentes</TransactionTitle>
+        <TransactionButtonFilter>
+          <TransactionButtonFilterText>Veja tudo</TransactionButtonFilterText>
+        </TransactionButtonFilter>
+      </TransactionTitleArea>
+
+      <TransactionCardItem />
+      <TransactionCardItem />
     </Container>
   )
 }
