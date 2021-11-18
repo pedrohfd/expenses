@@ -1,8 +1,12 @@
 import { SafeAreaView } from 'react-native-safe-area-context'
 import styled from 'styled-components/native'
 import { LinearGradient } from 'expo-linear-gradient'
+import { MotiView } from 'moti'
+import { MotiPressable } from '@motify/interactions'
+
 import { colors } from '../../styles/colors'
 import fonts from '../../styles/fonts'
+import { Dimensions } from 'react-native'
 
 export const Container = styled(SafeAreaView)``
 
@@ -139,4 +143,29 @@ export const ChartTitle = styled.Text`
   color: ${colors.dark_100};
 
   margin-left: 16px;
+`
+
+export const ChartFilterButtonArea = styled.View`
+  flex-direction: row;
+  padding-left: 16px;
+
+  padding-right: 16px;
+  flex: 1;
+  /* width: ${Dimensions.get('screen').width};
+  height: 20px; */
+`
+
+export const ChartFilterButton = styled.TouchableOpacity``
+
+export const ChartFilterButtonText = styled.Text``
+
+export const AnimatedButton = styled(MotiPressable)`
+  background: ${colors.yellow_20};
+  height: 34px;
+  width: 90px;
+
+  border-radius: 16px;
+
+  justify-content: center;
+  align-items: center;
 `

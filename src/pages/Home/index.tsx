@@ -1,17 +1,22 @@
 import React from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { LineChart } from 'react-native-chart-kit'
-import { LinearGradient } from 'expo-linear-gradient'
+import { useMotiPressable } from '@motify/interactions'
+import { MotiView } from '@motify/components'
 
 import ExpensesIcon from '../../assets/icons/expenses.svg'
 import IncomeIcon from '../../assets/icons/income.svg'
 import ArrowDownIcon from '../../assets/icons/purple-arrow-down-2.svg'
 import NotificationIcon from '../../assets/icons/notification.svg'
 import {
+  AnimatedButton,
   Avatar,
   Balance,
   BalanceTitle,
   ChartArea,
+  ChartFilterButton,
+  ChartFilterButtonArea,
+  ChartFilterButtonText,
   ChartTitle,
   Container,
   Expenses,
@@ -38,6 +43,42 @@ const data = [
 ]
 
 export function Home() {
+  const week = 90
+  const today = 0
+
+  function ChartButton() {
+    return (
+      <AnimatedButton
+        from={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+        }}
+        transition={{
+          type: 'timing',
+          duration: 2000,
+        }}
+      >
+        <ChartFilterButtonText>Hoje</ChartFilterButtonText>
+      </AnimatedButton>
+    )
+  }
+
+  function Item() {
+    const state = useMotiPressable(({ pressed }) => {
+      'worklet'
+
+      return {
+        opacity: pressed ? 0 : 1,
+      }
+    })
+
+    return (
+      <MotiView state={state} style={{ backgroundColor: '#000', height: 10 }} />
+    )
+  }
+
   return (
     <Container>
       <StatusBar style='dark' backgroundColor='#fff6e5' />
@@ -85,7 +126,7 @@ export function Home() {
       <ChartArea>
         <LineChart
           height={185}
-          width={Dimensions.get('window').width}
+          width={Dimensions.get('window').width + 21}
           data={{
             labels: [''],
             datasets: [
@@ -105,6 +146,7 @@ export function Home() {
             paddingTop: 5,
             paddingRight: 0,
           }}
+          fromZero
           withHorizontalLines={false}
           withVerticalLines={false}
           withHorizontalLabels={false}
@@ -113,6 +155,30 @@ export function Home() {
           bezier
         />
       </ChartArea>
+
+      <ChartFilterButtonArea>
+        <MotiView
+          style={{
+            height: 34,
+            width: 90,
+            backgroundColor: colors.yellow_20,
+            position: 'absolute',
+          }}
+          from={{
+            translateX: 0,
+          }}
+          animate={{
+            translateX: 100,
+          }}
+        />
+        <ChartFilterButton>
+          <ChartFilterButtonText>Hoje</ChartFilterButtonText>
+        </ChartFilterButton>
+
+        <ChartFilterButton>
+          <ChartFilterButtonText>Semana</ChartFilterButtonText>
+        </ChartFilterButton>
+      </ChartFilterButtonArea>
     </Container>
   )
 }
