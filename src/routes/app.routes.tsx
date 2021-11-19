@@ -3,6 +3,7 @@ import {
   createStackNavigator,
   TransitionPresets,
 } from '@react-navigation/stack'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import { AppStackParamList } from '../pages/RootStackParams'
 import { PinSetup } from '../pages/PinSetup'
@@ -11,10 +12,11 @@ import { SetupAccount } from '../pages/SetupAccount'
 import { AddNewAccount } from '../pages/AddNewAccount'
 import { Success } from '../pages/Success'
 import { Home } from '../pages/Home'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Transaction } from '../pages/Transaction'
 import { Budget } from '../pages/Budget'
 import { Profile } from '../pages/Profile'
+
+import { colors } from '../styles/colors'
 
 const BottomRoutes = createBottomTabNavigator<AppStackParamList>()
 
@@ -22,12 +24,43 @@ export function AppRoutes() {
   return (
     <BottomRoutes.Navigator
       screenOptions={{
-        tabBarStyle: {},
+        headerShown: false,
+
+        tabBarStyle: {
+          backgroundColor: colors.light_80,
+        },
       }}
     >
-      <BottomRoutes.Screen name='Home' component={Home} options={{}} />
-      <BottomRoutes.Screen name='Transaction' component={Transaction} />
-      <BottomRoutes.Screen name='Budget' component={Budget} />
+      <BottomRoutes.Screen
+        name='Home'
+        component={Home}
+        options={{
+          tabBarItemStyle: {
+            borderTopRightRadius: 100,
+          },
+        }}
+      />
+      <BottomRoutes.Screen
+        name='Transaction'
+        component={Transaction}
+        // options={{
+        //   tabBarButton: props => <CustomTabBar {...props} />,
+        //   tabBarItemStyle: {
+        //     backgroundColor: 'transparent',
+        //   },
+        // }}
+      />
+      <BottomRoutes.Screen
+        name='Budget'
+        component={Budget}
+        options={{
+          tabBarItemStyle: {
+            marginLeft: 80,
+            opacity: 0,
+            backgroundColor: 'transparent',
+          },
+        }}
+      />
       <BottomRoutes.Screen name='Profile' component={Profile} />
     </BottomRoutes.Navigator>
   )
