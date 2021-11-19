@@ -149,7 +149,6 @@ export function Home() {
           }}
           style={{
             paddingTop: 5,
-            // paddingRight: 10,
             alignItems: 'center',
             justifyContent: 'center',
           }}

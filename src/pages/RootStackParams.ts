@@ -15,4 +15,7 @@ export type AppStackParamList = {
   AddNewAccount: undefined
   Success: undefined
   Home: undefined
+  Transaction: undefined
+  Budget: undefined
+  Profile: undefined
 }
