@@ -17,50 +17,24 @@ import { Budget } from '../pages/Budget'
 import { Profile } from '../pages/Profile'
 
 import { colors } from '../styles/colors'
+import { CustomTabBar } from '../components/CustomTabBar'
 
 const BottomRoutes = createBottomTabNavigator<AppStackParamList>()
 
 export function AppRoutes() {
   return (
     <BottomRoutes.Navigator
+      tabBar={props => <CustomTabBar {...props} />}
       screenOptions={{
         headerShown: false,
-
         tabBarStyle: {
           backgroundColor: colors.light_80,
         },
       }}
     >
-      <BottomRoutes.Screen
-        name='Home'
-        component={Home}
-        options={{
-          tabBarItemStyle: {
-            borderTopRightRadius: 100,
-          },
-        }}
-      />
-      <BottomRoutes.Screen
-        name='Transaction'
-        component={Transaction}
-        // options={{
-        //   tabBarButton: props => <CustomTabBar {...props} />,
-        //   tabBarItemStyle: {
-        //     backgroundColor: 'transparent',
-        //   },
-        // }}
-      />
-      <BottomRoutes.Screen
-        name='Budget'
-        component={Budget}
-        options={{
-          tabBarItemStyle: {
-            marginLeft: 80,
-            opacity: 0,
-            backgroundColor: 'transparent',
-          },
-        }}
-      />
+      <BottomRoutes.Screen name='Home' component={Home} />
+      <BottomRoutes.Screen name='Transaction' component={Transaction} />
+      <BottomRoutes.Screen name='Budget' component={Budget} />
       <BottomRoutes.Screen name='Profile' component={Profile} />
     </BottomRoutes.Navigator>
   )
@@ -104,3 +78,5 @@ export function AccountRoutes() {
     </StackRoutes.Navigator>
   )
 }
+
+export function SpendingRoutes() {}

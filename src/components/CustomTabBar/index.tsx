@@ -1,26 +1,65 @@
-import React from 'react'
-import Svg, { Path } from 'react-native-svg'
+import { BottomTabBarProps } from '@react-navigation/bottom-tabs'
+import { BottomTabNavigationEventMap } from '@react-navigation/bottom-tabs/lib/typescript/src/types'
+import React, { useState } from 'react'
 
-import { Button, Container, Icon } from './styles'
+import { Button, CenterButton, Container, Icon, TabBg } from './styles'
 
-export function TabBg({ ...props }) {
+interface CustomButtonProps {
+  index: number
+  isFocused: boolean
+}
+
+export function CustomButton({ index, isFocused }: CustomButtonProps) {
+  let center = 0
+
   return (
-    <Svg width={75} height={61} viewBox='0 0 75 61' {...props}>
-      <Path
-        d='M75.2 0v61H0V0c4.1 0 7.4 3.1 7.9 7.1C10 21.7 22.5 33 37.7 33c15.2 0 27.7-11.3 29.7-25.9.5-4 3.9-7.1 7.9-7.1h-.1z'
-        fill={'#ffffff'}
-      />
-    </Svg>
+    <Container>
+      {index > 1 ? (
+        <CenterButton>
+          <TabBg>teste</TabBg>
+        </CenterButton>
+      ) : (
+        <Container>
+          <Icon />
+        </Container>
+      )}
+    </Container>
   )
 }
 
-export function CustomTabBar({ ...props }) {
+export function CustomTabBar({
+  state,
+  navigation,
+  descriptors,
+}: BottomTabBarProps) {
   return (
     <Container>
-      <TabBg style={{ position: 'absolute', top: 0 }} />
-      <Button onPress={props.onPress}>
-        <Icon />
-      </Button>
+      {state.routes.map((route: any, index: number) => {
+        const isFocused = state.index === index
+        const { options } = descriptors[route.key]
+
+        const onPress = () => {
+          const event = navigation.emit({
+            type: 'tabPress' as any,
+            target: route.key as any,
+          })
+
+          if (!isFocused && !event.defaultPrevented) {
+            navigation.navigate(route.name)
+          }
+        }
+
+        return (
+          <Button
+            key={index}
+            onPress={onPress}
+            testID={options.tabBarTestID}
+            accessibilityRole='button'
+          >
+            <CustomButton index={index} isFocused={isFocused} />
+          </Button>
+        )
+      })}
     </Container>
   )
 }
