@@ -33,6 +33,8 @@ interface AuthContextProps {
   signInWithGoogle(): Promise<void>
   savePin: () => {}
   saveAccountType: (accountType: string) => {}
+  toggleModal: () => void
+  isModalVisible: boolean
 }
 
 interface ContextProps {
@@ -53,6 +55,7 @@ export const AuthContext = createContext({} as AuthContextProps)
 function AuthProvider({ children }: ContextProps) {
   const [user, setUser] = useState<User | null>(null)
   const [pin, setPin] = useState('')
+  const [isModalVisible, setIsModalVisible] = useState(false)
   const navigation = useNavigation<authScreenProp>()
 
   useEffect(() => {
@@ -81,6 +84,10 @@ function AuthProvider({ children }: ContextProps) {
 
     loadStorage()
   }, [user])
+
+  function toggleModal() {
+    setIsModalVisible(!isModalVisible)
+  }
 
   async function saveAccountType(accountType: string) {
     const { uid } = user as User
@@ -266,6 +273,8 @@ function AuthProvider({ children }: ContextProps) {
         signInWithGoogle,
         savePin,
         saveAccountType,
+        toggleModal,
+        isModalVisible,
       }}
     >
       {children}

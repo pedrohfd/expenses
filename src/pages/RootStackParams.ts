@@ -18,4 +18,8 @@ export type AppStackParamList = {
   Transaction: undefined
   Budget: undefined
   Profile: undefined
+  Expense: undefined
+  Income: undefined
+  Transfer: undefined
+  SpendingRoutes: undefined
 }

@@ -1,10 +1,10 @@
 import React from 'react'
 import { Container, Text } from './styles'
 
-export function Expenses() {
+export function Income() {
   return (
     <Container>
-      <Text>Expenses</Text>
+      <Text>Income</Text>
     </Container>
   )
 }

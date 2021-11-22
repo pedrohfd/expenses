@@ -1,65 +1,62 @@
-import { BottomTabBarProps } from '@react-navigation/bottom-tabs'
-import { BottomTabNavigationEventMap } from '@react-navigation/bottom-tabs/lib/typescript/src/types'
 import React, { useState } from 'react'
+import { useNavigation } from '@react-navigation/core'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { MotiView } from '@motify/components'
+import { MotiPressable } from '@motify/interactions'
 
-import { Button, CenterButton, Container, Icon, TabBg } from './styles'
+import AddIcon from '../../assets/icons/add.svg'
+import IncomeIcon from '../../assets/icons/incomePage.svg'
+import TransferIcon from '../../assets/icons/transfer.svg'
+import ExpenseIcon from '../../assets/icons/expense.svg'
+import { AppStackParamList } from '../../pages/RootStackParams'
+import { CenterButton, Container, Button } from './styles'
 
-interface CustomButtonProps {
-  index: number
-  isFocused: boolean
-}
+type appScreenProp = StackNavigationProp<AppStackParamList>
 
-export function CustomButton({ index, isFocused }: CustomButtonProps) {
-  let center = 0
+export function CustomTabBar(props: any) {
+  const [isButtonPressed, setIsButtonPressed] = useState(false)
+
+  const navigation = useNavigation<appScreenProp>()
+
+  const startDeg = '0deg'
+  const endDeg = '45deg'
+
+  function openPage() {
+    navigation.navigate('Expense')
+  }
 
   return (
-    <Container>
-      {index > 1 ? (
-        <CenterButton>
-          <TabBg>teste</TabBg>
-        </CenterButton>
-      ) : (
-        <Container>
-          <Icon />
-        </Container>
-      )}
-    </Container>
-  )
-}
-
-export function CustomTabBar({
-  state,
-  navigation,
-  descriptors,
-}: BottomTabBarProps) {
-  return (
-    <Container>
-      {state.routes.map((route: any, index: number) => {
-        const isFocused = state.index === index
-        const { options } = descriptors[route.key]
-
-        const onPress = () => {
-          const event = navigation.emit({
-            type: 'tabPress' as any,
-            target: route.key as any,
-          })
-
-          if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate(route.name)
-          }
-        }
-
-        return (
-          <Button
-            key={index}
-            onPress={onPress}
-            testID={options.tabBarTestID}
-            accessibilityRole='button'
-          >
-            <CustomButton index={index} isFocused={isFocused} />
-          </Button>
-        )
-      })}
+    <Container {...props}>
+      <CenterButton onPress={() => setIsButtonPressed(!isButtonPressed)}>
+        <MotiView
+          from={{ rotate: isButtonPressed ? startDeg : endDeg }}
+          animate={{ rotate: isButtonPressed ? endDeg : startDeg }}
+        >
+          <AddIcon height={57} width={57} />
+        </MotiView>
+      </CenterButton>
+      <MotiView
+        style={{ position: 'absolute', zIndex: -1 }}
+        animate={{
+          left: isButtonPressed ? -68 : 15,
+          top: isButtonPressed ? -80 : -11,
+        }}
+      >
+        <Button>
+          <IncomeIcon height={54} width={54} />
+        </Button>
+      </MotiView>
+      <Button onPress={openPage}>
+        <MotiView
+          style={{ position: 'absolute', zIndex: -1 }}
+          animate={{
+            left: isButtonPressed ? 58 : 15,
+            top: isButtonPressed ? -180 : -11,
+          }}
+        >
+          <ExpenseIcon height={54} width={54} />
+        </MotiView>
+      </Button>
     </Container>
   )
 }

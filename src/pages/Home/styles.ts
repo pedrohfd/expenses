@@ -2,11 +2,9 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import styled from 'styled-components/native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { MotiView } from 'moti'
-import { MotiPressable } from '@motify/interactions'
 
 import { colors } from '../../styles/colors'
 import fonts from '../../styles/fonts'
-import { Dimensions } from 'react-native'
 
 export const Container = styled(SafeAreaView)``
 
