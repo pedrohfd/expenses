@@ -39,4 +39,6 @@ export const colors = {
   blue_60: '#57a5ff',
   blue_80: '#248aff',
   blue_100: '#0077ff',
+
+  inativeTintColor: '#c6c6c6',
 }

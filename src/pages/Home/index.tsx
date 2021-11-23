@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { Dimensions } from 'react-native'
-import { StatusBar } from 'expo-status-bar'
+import { Dimensions, StatusBar } from 'react-native'
 import { LineChart } from 'react-native-chart-kit'
 
 import ExpensesIcon from '../../assets/icons/expenses.svg'
@@ -86,7 +85,7 @@ export function Home() {
 
   return (
     <Container>
-      <StatusBar style='dark' backgroundColor='#fff6e5' />
+      <StatusBar barStyle='dark-content' backgroundColor='#fff6e5' />
       <Gradient colors={['#FFF6E5', '#F8EDD800']}>
         <HeaderItems>
           <Avatar />

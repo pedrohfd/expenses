@@ -5,6 +5,15 @@ import {
 } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
+import HomeIcon from '../assets/icons/home.svg'
+import HomeGrayIcon from '../assets/icons/home-gray.svg'
+import TransactionIcon from '../assets/icons/transaction.svg'
+import TransactionGrayIcon from '../assets/icons/transaction-gray.svg'
+import BudgetIcon from '../assets/icons/pie-chart.svg'
+import BudgetGrayIcon from '../assets/icons/pie-chart-gray.svg'
+import ProfileIcon from '../assets/icons/user.svg'
+import ProfileGrayIcon from '../assets/icons/user-gray.svg'
+
 import { AppStackParamList } from '../pages/RootStackParams'
 import { PinSetup } from '../pages/PinSetup'
 import { PinConfirmation } from '../pages/PinConfirmation'
@@ -15,12 +24,12 @@ import { Home } from '../pages/Home'
 import { Transaction } from '../pages/Transaction'
 import { Budget } from '../pages/Budget'
 import { Profile } from '../pages/Profile'
-
 import { colors } from '../styles/colors'
 import { CustomTabBar } from '../components/CustomTabBar'
 import { Expenses } from '../pages/Expenses'
 import { Income } from '../pages/Income'
 import { Transfer } from '../pages/Transfer'
+import fonts from '../styles/fonts'
 
 const BottomRoutes = createBottomTabNavigator<AppStackParamList>()
 
@@ -33,10 +42,45 @@ export function AppRoutes() {
           backgroundColor: colors.light_80,
           height: 70,
         },
+        tabBarLabelStyle: {
+          fontFamily: fonts.medium,
+          fontSize: 10,
+        },
+        tabBarInactiveTintColor: colors.inativeTintColor,
+        tabBarActiveTintColor: colors.violet_100,
       }}
     >
-      <BottomRoutes.Screen name='Home' component={Home} />
-      <BottomRoutes.Screen name='Transaction' component={Transaction} />
+      <BottomRoutes.Screen
+        name='Home'
+        component={Home}
+        options={{
+          tabBarItemStyle: {
+            marginVertical: 11,
+          },
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <HomeIcon height={32} width={32} />
+            ) : (
+              <HomeGrayIcon height={32} width={32} />
+            ),
+        }}
+      />
+      <BottomRoutes.Screen
+        name='Transaction'
+        component={Transaction}
+        options={{
+          tabBarLabel: 'Transações',
+          tabBarItemStyle: {
+            marginVertical: 11,
+          },
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <TransactionIcon height={32} width={32} />
+            ) : (
+              <TransactionGrayIcon height={32} width={32} />
+            ),
+        }}
+      />
       <BottomRoutes.Screen
         name='SpendingRoutes'
         component={SpendingRoutes}
@@ -46,8 +90,38 @@ export function AppRoutes() {
           tabBarButton: props => <CustomTabBar {...props} />,
         }}
       />
-      <BottomRoutes.Screen name='Budget' component={Budget} />
-      <BottomRoutes.Screen name='Profile' component={Profile} />
+      <BottomRoutes.Screen
+        name='Budget'
+        component={Budget}
+        options={{
+          tabBarLabel: 'Orçamento',
+          tabBarItemStyle: {
+            marginVertical: 11,
+          },
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <BudgetIcon height={32} width={32} />
+            ) : (
+              <BudgetGrayIcon height={32} width={32} />
+            ),
+        }}
+      />
+      <BottomRoutes.Screen
+        name='Profile'
+        component={Profile}
+        options={{
+          tabBarLabel: 'Perfil',
+          tabBarItemStyle: {
+            marginVertical: 11,
+          },
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <ProfileIcon height={32} width={32} />
+            ) : (
+              <ProfileGrayIcon height={32} width={32} />
+            ),
+        }}
+      />
     </BottomRoutes.Navigator>
   )
 }

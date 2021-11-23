@@ -10,6 +10,8 @@ import TransferIcon from '../../assets/icons/transfer.svg'
 import ExpenseIcon from '../../assets/icons/expense.svg'
 import { AppStackParamList } from '../../pages/RootStackParams'
 import { CenterButton, Container, Button } from './styles'
+import { LinearGradient } from 'expo-linear-gradient'
+import { Dimensions } from 'react-native'
 
 type appScreenProp = StackNavigationProp<AppStackParamList>
 
@@ -21,8 +23,10 @@ export function CustomTabBar(props: any) {
   const startDeg = '0deg'
   const endDeg = '45deg'
 
-  function openPage() {
-    navigation.navigate('Expense')
+  function openPage(page: any) {
+    setIsButtonPressed(false)
+
+    navigation.navigate('SpendingRoutes', { screen: page })
   }
 
   return (
@@ -38,25 +42,36 @@ export function CustomTabBar(props: any) {
       <MotiView
         style={{ position: 'absolute', zIndex: -1 }}
         animate={{
-          left: isButtonPressed ? -68 : 15,
+          left: isButtonPressed ? -53 : 15,
           top: isButtonPressed ? -80 : -11,
         }}
       >
-        <Button>
+        <MotiPressable onPress={() => openPage('Income')}>
           <IncomeIcon height={54} width={54} />
-        </Button>
+        </MotiPressable>
       </MotiView>
-      <Button onPress={openPage}>
-        <MotiView
-          style={{ position: 'absolute', zIndex: -1 }}
-          animate={{
-            left: isButtonPressed ? 58 : 15,
-            top: isButtonPressed ? -180 : -11,
-          }}
-        >
+      <MotiView
+        style={{ position: 'absolute', zIndex: -1 }}
+        animate={{
+          left: isButtonPressed ? 81 : 15,
+          top: isButtonPressed ? -80 : -11,
+        }}
+      >
+        <MotiPressable onPress={() => openPage('Expense')}>
           <ExpenseIcon height={54} width={54} />
-        </MotiView>
-      </Button>
+        </MotiPressable>
+      </MotiView>
+      <MotiView
+        style={{ position: 'absolute', zIndex: -1 }}
+        animate={{
+          left: 15,
+          top: isButtonPressed ? -148 : -11,
+        }}
+      >
+        <MotiPressable onPress={() => openPage('Transfer')}>
+          <TransferIcon height={54} width={54} />
+        </MotiPressable>
+      </MotiView>
     </Container>
   )
 }
