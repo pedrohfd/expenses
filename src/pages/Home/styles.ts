@@ -1,12 +1,21 @@
-import { SafeAreaView } from 'react-native-safe-area-context'
 import styled from 'styled-components/native'
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 import { LinearGradient } from 'expo-linear-gradient'
 import { MotiView } from 'moti'
 
 import { colors } from '../../styles/colors'
 import fonts from '../../styles/fonts'
 
-export const Container = styled(SafeAreaView)``
+interface ContainerProps {
+  height: number
+}
+
+export const StatusBarColor = styled.View<ContainerProps>`
+  height: ${props => props.height};
+  background: #fff6e5;
+`
+
+export const Container = styled.View``
 
 export const Gradient = styled(LinearGradient)`
   height: 312px;

@@ -93,6 +93,7 @@ export const RepeatButtonArea = styled.View`
   padding-left: 16px;
 
   align-items: center;
+  justify-content: space-between;
 
   margin-top: 16px;
 `
@@ -123,7 +124,7 @@ export const ContinueButton = styled.TouchableOpacity`
   background: ${colors.violet_100};
 
   margin-top: 40px;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 
   border-radius: 16px;
 `
@@ -133,4 +134,65 @@ export const ContinueButtonText = styled.Text`
   font-family: ${fonts.semiBold};
 
   color: ${colors.light_80};
+`
+
+export const ModalContent = styled.View`
+  background: ${colors.light_100};
+  height: 264px;
+
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
+`
+
+export const Swipe = styled.View`
+  align-self: center;
+
+  height: 4px;
+  width: 36px;
+
+  margin-top: 8px;
+
+  background: ${colors.violet_40};
+
+  border-radius: 2px;
+`
+
+export const FrequencyPicker = styled.TouchableOpacity`
+  height: 56px;
+
+  margin: 24px 16px 0;
+
+  justify-content: center;
+
+  padding-left: 16px;
+
+  border-width: 1px;
+  border-radius: 16px;
+  border-color: ${colors.light_60};
+`
+
+export const FrequencyPickerText = styled.Text`
+  color: ${colors.light_20};
+  font-size: 16px;
+  font-family: ${fonts.medium};
+`
+
+export const EndPicker = styled.TouchableOpacity`
+  height: 56px;
+
+  margin: 24px 16px 0;
+
+  justify-content: center;
+
+  padding-left: 16px;
+
+  border-width: 1px;
+  border-radius: 16px;
+  border-color: ${colors.light_60};
+`
+
+export const EndPickerText = styled.Text`
+  color: ${colors.light_20};
+  font-size: 16px;
+  font-family: ${fonts.medium};
 `

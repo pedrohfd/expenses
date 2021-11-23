@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigation } from '@react-navigation/core'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { StackNavigationProp } from '@react-navigation/stack'
 
 import ArrowLeftIcon from '../../assets/icons/arrow-left.svg'
 import WhiteArrowLeftIcon from '../../assets/icons/white-arrow-left.svg'
@@ -8,7 +8,7 @@ import { AuthStackParamList } from '../../pages/RootStackParams'
 import { Button, Container, Text, View } from './styles'
 import { colors } from '../../styles/colors'
 
-type authScreenProp = NativeStackNavigationProp<AuthStackParamList>
+type authScreenProp = StackNavigationProp<AuthStackParamList>
 
 interface HeaderProps {
   title: string

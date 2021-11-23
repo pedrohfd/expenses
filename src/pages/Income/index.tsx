@@ -1,10 +1,25 @@
+import { StatusBar } from 'expo-status-bar'
 import React from 'react'
-import { Container, Text } from './styles'
+import { ExpenseIncome } from '../../components/ExpenseIncome'
+import { Header } from '../../components/Header'
+import { colors } from '../../styles/colors'
+import { Container, Title, Income } from './styles'
 
-export function Income() {
+export function Incomes() {
   return (
     <Container>
-      <Text>Income</Text>
+      {/* <StatusBar style='light' backgroundColor={colors.green_100} translucent /> */}
+      <Header
+        title='Receita'
+        color={colors.green_100}
+        textColor={colors.light_100}
+      />
+
+      <Title>Quanto custou?</Title>
+
+      <Income>R$ 0</Income>
+
+      <ExpenseIncome />
     </Container>
   )
 }

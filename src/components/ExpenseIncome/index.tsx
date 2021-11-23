@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Modal from 'react-native-modal'
+import ToggleSwitch from 'toggle-switch-react-native'
 
 import AttachmentIcon from '../../assets/icons/attachment.svg'
+import { colors } from '../../styles/colors'
 import {
   AddAttachmentButton,
   AddAttachmentButtonText,
@@ -11,15 +13,23 @@ import {
   ContinueButton,
   ContinueButtonText,
   DescriptionInput,
+  EndPicker,
+  EndPickerText,
+  FrequencyPicker,
+  FrequencyPickerText,
+  ModalContent,
   RepeatButtonArea,
   RepeatButtonSubtitle,
   RepeatButtonTextArea,
   RepeatButtonTitle,
+  Swipe,
   WalletPicker,
   WalletPickerText,
 } from './styles'
 
 export function ExpenseIncome() {
+  const [isRepeatable, setIsRepeatable] = useState(false)
+
   return (
     <Container>
       <CategoryPicker>
@@ -44,11 +54,47 @@ export function ExpenseIncome() {
 
           <RepeatButtonSubtitle>Repetir transação</RepeatButtonSubtitle>
         </RepeatButtonTextArea>
+
+        <ToggleSwitch
+          isOn={isRepeatable}
+          onColor={colors.violet_100}
+          offColor={colors.violet_20}
+          onToggle={isOn => setIsRepeatable(isOn)}
+          thumbOffStyle={{
+            backgroundColor: colors.light_80,
+          }}
+          thumbOnStyle={{
+            backgroundColor: colors.light_80,
+          }}
+        />
       </RepeatButtonArea>
 
       <ContinueButton>
         <ContinueButtonText>Continue</ContinueButtonText>
       </ContinueButton>
+
+      <Modal
+        isVisible={isRepeatable}
+        onBackdropPress={() => setIsRepeatable(false)}
+        onSwipeComplete={() => setIsRepeatable(false)}
+        swipeDirection='down'
+        style={{
+          justifyContent: 'flex-end',
+          margin: 0,
+        }}
+      >
+        <ModalContent>
+          <Swipe />
+
+          <FrequencyPicker>
+            <FrequencyPickerText>Frequência</FrequencyPickerText>
+          </FrequencyPicker>
+
+          <EndPicker>
+            <EndPickerText>Término</EndPickerText>
+          </EndPicker>
+        </ModalContent>
+      </Modal>
     </Container>
   )
 }

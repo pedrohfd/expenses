@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@expo-google-fonts/inter": "^0.2.0",
+    "@expo/status-bar-height": "^0.0.1",
     "@motify/interactions": "^0.16.1",
     "@rainbow-me/animated-charts": "^1.0.0-alpha.6",
     "@react-native-async-storage/async-storage": "~1.15.0",
@@ -47,7 +48,8 @@
     "react-native-svg": "12.1.1",
     "react-native-uuid": "^2.0.1",
     "react-native-web": "~0.13.12",
-    "styled-components": "^5.3.1"
+    "styled-components": "^5.3.1",
+    "toggle-switch-react-native": "^3.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+  CardStyleInterpolators,
   createStackNavigator,
   TransitionPresets,
 } from '@react-navigation/stack'
@@ -27,7 +28,7 @@ import { Profile } from '../pages/Profile'
 import { colors } from '../styles/colors'
 import { CustomTabBar } from '../components/CustomTabBar'
 import { Expenses } from '../pages/Expenses'
-import { Income } from '../pages/Income'
+import { Incomes } from '../pages/Income'
 import { Transfer } from '../pages/Transfer'
 import fonts from '../styles/fonts'
 
@@ -81,6 +82,7 @@ export function AppRoutes() {
             ),
         }}
       />
+      {/* <CustomTabBar /> */}
       <BottomRoutes.Screen
         name='SpendingRoutes'
         component={SpendingRoutes}
@@ -90,6 +92,7 @@ export function AppRoutes() {
           tabBarButton: props => <CustomTabBar {...props} />,
         }}
       />
+
       <BottomRoutes.Screen
         name='Budget'
         component={Budget}
@@ -165,11 +168,11 @@ export function AccountRoutes() {
   )
 }
 
-export function SpendingRoutes() {
+function SpendingRoutes() {
   return (
     <StackRoutes.Navigator screenOptions={{ headerShown: false }}>
       <StackRoutes.Screen name='Expense' component={Expenses} />
-      <StackRoutes.Screen name='Income' component={Income} />
+      <StackRoutes.Screen name='Income' component={Incomes} />
       <StackRoutes.Screen name='Transfer' component={Transfer} />
     </StackRoutes.Navigator>
   )

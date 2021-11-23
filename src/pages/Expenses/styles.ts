@@ -6,6 +6,7 @@ import fonts from '../../styles/fonts'
 export const Container = styled(SafeAreaView)`
   background: ${colors.red_100};
   flex: 1;
+  justify-content: space-between;
 `
 
 export const Title = styled.Text`

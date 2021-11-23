@@ -1,10 +1,10 @@
 import React from 'react'
-import { Container, Text } from './styles'
+import { Container, Expense, Title } from './styles'
 
 export function Transfer() {
   return (
     <Container>
-      <Text>Transfer</Text>
+      <Title>Transfer</Title>
     </Container>
   )
 }

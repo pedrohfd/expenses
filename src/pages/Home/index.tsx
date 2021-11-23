@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Dimensions, StatusBar } from 'react-native'
+import { Dimensions } from 'react-native'
 import { LineChart } from 'react-native-chart-kit'
 
 import ExpensesIcon from '../../assets/icons/expenses.svg'
@@ -33,6 +33,7 @@ import {
   MonthButton,
   MonthText,
   NotificationButton,
+  StatusBarColor,
   Summary,
   TransactionButtonFilter,
   TransactionButtonFilterText,
@@ -41,6 +42,8 @@ import {
 } from './styles'
 import { colors } from '../../styles/colors'
 import { TransactionCardItem } from '../../components/TransactionCardItem'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { StatusBar } from 'expo-status-bar'
 
 const todayLabels = ['12:00', '']
 
@@ -73,6 +76,8 @@ export function Home() {
     year: false,
   })
 
+  const insets = useSafeAreaInsets().top
+
   const today = 16
   const week = 110
   const month = 206
@@ -84,171 +89,173 @@ export function Home() {
   }
 
   return (
-    <Container>
-      <StatusBar barStyle='dark-content' backgroundColor='#fff6e5' />
-      <Gradient colors={['#FFF6E5', '#F8EDD800']}>
-        <HeaderItems>
-          <Avatar />
+    <>
+      <StatusBarColor height={Math.round(insets)} />
+      <Container>
+        <Gradient colors={['#FFF6E5', '#F8EDD800']}>
+          <HeaderItems>
+            <Avatar />
 
-          <MonthButton>
-            <ArrowDownIcon height={24} width={24} />
-            <MonthText>Outubro</MonthText>
-          </MonthButton>
+            <MonthButton>
+              <ArrowDownIcon height={24} width={24} />
+              <MonthText>Outubro</MonthText>
+            </MonthButton>
 
-          <NotificationButton>
-            <NotificationIcon height={32} width={32} />
-          </NotificationButton>
-        </HeaderItems>
+            <NotificationButton>
+              <NotificationIcon height={32} width={32} />
+            </NotificationButton>
+          </HeaderItems>
 
-        <BalanceTitle>Saldo da conta</BalanceTitle>
-        <Balance>R$ 9400</Balance>
+          <BalanceTitle>Saldo da conta</BalanceTitle>
+          <Balance>R$ 9400</Balance>
 
-        <Summary>
-          <Income>
-            <IncomeIcon height={48} width={48} />
+          <Summary>
+            <Income>
+              <IncomeIcon height={48} width={48} />
 
-            <IncomeTextArea>
-              <IncomeTitle>Renda</IncomeTitle>
+              <IncomeTextArea>
+                <IncomeTitle>Renda</IncomeTitle>
 
-              <IncomeValue>$5000</IncomeValue>
-            </IncomeTextArea>
-          </Income>
+                <IncomeValue>$5000</IncomeValue>
+              </IncomeTextArea>
+            </Income>
 
-          <Expenses>
-            <ExpensesIcon height={48} width={48} />
+            <Expenses>
+              <ExpensesIcon height={48} width={48} />
 
-            <ExpensesTextArea>
-              <ExpensesTitle>Despesas</ExpensesTitle>
+              <ExpensesTextArea>
+                <ExpensesTitle>Despesas</ExpensesTitle>
 
-              <ExpensesValue>$1200</ExpensesValue>
-            </ExpensesTextArea>
-          </Expenses>
-        </Summary>
-      </Gradient>
+                <ExpensesValue>$1200</ExpensesValue>
+              </ExpensesTextArea>
+            </Expenses>
+          </Summary>
+        </Gradient>
 
-      <ChartTitle>Frequência de Gastos</ChartTitle>
-      <ChartArea>
-        <LineChart
-          height={185}
-          width={Dimensions.get('window').width + 21}
-          data={{
-            labels: labels,
-            datasets: [
-              {
-                data: data,
-              },
-            ],
-          }}
-          chartConfig={{
-            backgroundGradientFromOpacity: 0,
-            backgroundGradientToOpacity: 0,
-            fillShadowGradient: '#8b50ff',
-            fillShadowGradientOpacity: 0.2,
-            color: () => colors.violet_100,
-          }}
-          style={{
-            paddingTop: 5,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-          fromZero
-          withHorizontalLines={false}
-          withHorizontalLabels={false}
-          withDots={true}
-          bezier
-        />
-      </ChartArea>
+        <ChartTitle>Frequência de Gastos</ChartTitle>
+        <ChartArea>
+          <LineChart
+            height={185}
+            width={Dimensions.get('window').width + 21}
+            data={{
+              labels: labels,
+              datasets: [
+                {
+                  data: data,
+                },
+              ],
+            }}
+            chartConfig={{
+              backgroundGradientFromOpacity: 0,
+              backgroundGradientToOpacity: 0,
+              fillShadowGradient: '#8b50ff',
+              fillShadowGradientOpacity: 0.2,
+              color: () => colors.violet_100,
+            }}
+            style={{
+              paddingTop: 5,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            fromZero
+            withHorizontalLines={false}
+            withHorizontalLabels={false}
+            withDots={true}
+            bezier
+          />
+        </ChartArea>
 
-      <ChartFilterButtonArea>
-        <AnimatedButton
-          from={{
-            translateX: from,
-          }}
-          animate={{
-            translateX: animate,
-          }}
-        />
-        <ChartFilterButton
-          onPress={() => {
-            data = todayData
-            labels = todayLabels
-            handleSelectedChart(today)
-            setButtonPressed({
-              today: true,
-              week: false,
-              month: false,
-              year: false,
-            })
-          }}
-        >
-          <ChartFilterTodayButtonText pressed={buttonPressed.today}>
-            Hoje
-          </ChartFilterTodayButtonText>
-        </ChartFilterButton>
+        <ChartFilterButtonArea>
+          <AnimatedButton
+            from={{
+              translateX: from,
+            }}
+            animate={{
+              translateX: animate,
+            }}
+          />
+          <ChartFilterButton
+            onPress={() => {
+              data = todayData
+              labels = todayLabels
+              handleSelectedChart(today)
+              setButtonPressed({
+                today: true,
+                week: false,
+                month: false,
+                year: false,
+              })
+            }}
+          >
+            <ChartFilterTodayButtonText pressed={buttonPressed.today}>
+              Hoje
+            </ChartFilterTodayButtonText>
+          </ChartFilterButton>
 
-        <ChartFilterButton
-          onPress={() => {
-            data = weekData
-            labels = weekLabels
-            handleSelectedChart(week)
-            setButtonPressed({
-              today: false,
-              week: true,
-              month: false,
-              year: false,
-            })
-          }}
-        >
-          <ChartFilterWeekButtonText pressed={buttonPressed.week}>
-            Semana
-          </ChartFilterWeekButtonText>
-        </ChartFilterButton>
+          <ChartFilterButton
+            onPress={() => {
+              data = weekData
+              labels = weekLabels
+              handleSelectedChart(week)
+              setButtonPressed({
+                today: false,
+                week: true,
+                month: false,
+                year: false,
+              })
+            }}
+          >
+            <ChartFilterWeekButtonText pressed={buttonPressed.week}>
+              Semana
+            </ChartFilterWeekButtonText>
+          </ChartFilterButton>
 
-        <ChartFilterButton
-          onPress={() => {
-            data = monthData
-            handleSelectedChart(month)
-            setButtonPressed({
-              today: false,
-              week: false,
-              month: true,
-              year: false,
-            })
-          }}
-        >
-          <ChartFilterMonthButtonText pressed={buttonPressed.month}>
-            Mês
-          </ChartFilterMonthButtonText>
-        </ChartFilterButton>
+          <ChartFilterButton
+            onPress={() => {
+              data = monthData
+              handleSelectedChart(month)
+              setButtonPressed({
+                today: false,
+                week: false,
+                month: true,
+                year: false,
+              })
+            }}
+          >
+            <ChartFilterMonthButtonText pressed={buttonPressed.month}>
+              Mês
+            </ChartFilterMonthButtonText>
+          </ChartFilterButton>
 
-        <ChartFilterButton
-          onPress={() => {
-            data = yearData
-            labels = yearLabels
-            handleSelectedChart(year)
-            setButtonPressed({
-              today: false,
-              week: false,
-              month: false,
-              year: true,
-            })
-          }}
-        >
-          <ChartFilterYearButtonText pressed={buttonPressed.year}>
-            Ano
-          </ChartFilterYearButtonText>
-        </ChartFilterButton>
-      </ChartFilterButtonArea>
+          <ChartFilterButton
+            onPress={() => {
+              data = yearData
+              labels = yearLabels
+              handleSelectedChart(year)
+              setButtonPressed({
+                today: false,
+                week: false,
+                month: false,
+                year: true,
+              })
+            }}
+          >
+            <ChartFilterYearButtonText pressed={buttonPressed.year}>
+              Ano
+            </ChartFilterYearButtonText>
+          </ChartFilterButton>
+        </ChartFilterButtonArea>
 
-      <TransactionTitleArea>
-        <TransactionTitle>Transações Recentes</TransactionTitle>
-        <TransactionButtonFilter>
-          <TransactionButtonFilterText>Veja tudo</TransactionButtonFilterText>
-        </TransactionButtonFilter>
-      </TransactionTitleArea>
+        <TransactionTitleArea>
+          <TransactionTitle>Transações Recentes</TransactionTitle>
+          <TransactionButtonFilter>
+            <TransactionButtonFilterText>Veja tudo</TransactionButtonFilterText>
+          </TransactionButtonFilter>
+        </TransactionTitleArea>
 
-      <TransactionCardItem />
-      <TransactionCardItem />
-    </Container>
+        <TransactionCardItem />
+        <TransactionCardItem />
+      </Container>
+    </>
   )
 }
