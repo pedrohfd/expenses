@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Dimensions } from 'react-native'
 import { LineChart } from 'react-native-chart-kit'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import ExpensesIcon from '../../assets/icons/expenses.svg'
 import IncomeIcon from '../../assets/icons/income.svg'
@@ -42,8 +43,7 @@ import {
 } from './styles'
 import { colors } from '../../styles/colors'
 import { TransactionCardItem } from '../../components/TransactionCardItem'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { StatusBar } from 'expo-status-bar'
+import { AuthContext } from '../../context/auth'
 
 const todayLabels = ['12:00', '']
 
@@ -76,6 +76,10 @@ export function Home() {
     year: false,
   })
 
+  const { user } = useContext(AuthContext)
+
+  const accountBalance = user?.accountBalance
+
   const insets = useSafeAreaInsets().top
 
   const today = 16
@@ -107,7 +111,7 @@ export function Home() {
           </HeaderItems>
 
           <BalanceTitle>Saldo da conta</BalanceTitle>
-          <Balance>R$ 9400</Balance>
+          <Balance>R$ {accountBalance}</Balance>
 
           <Summary>
             <Income>

@@ -14,6 +14,7 @@ interface User {
   uid: string
   pin: string
   accountType: string
+  accountBalance: number
 }
 
 interface UserCredentials {
@@ -76,6 +77,7 @@ function AuthProvider({ children }: ContextProps) {
             password: snapshot.val().password,
             pin: snapshot.val().pin,
             accountType: snapshot.val().accountType,
+            accountBalance: snapshot.val().accountBalance,
           }
 
           setUser(data)
@@ -94,7 +96,10 @@ function AuthProvider({ children }: ContextProps) {
 
     await database.ref('users').child(uid).update({
       accountType: accountType,
+      accountBalance: 0,
     })
+
+    // await database.ref('users').child(uid).child(accountType)
   }
 
   async function savePin() {
@@ -128,6 +133,7 @@ function AuthProvider({ children }: ContextProps) {
                 password: password,
                 pin: snapshot.val().pin,
                 accountType: snapshot.val().accountType,
+                accountBalance: snapshot.val().accountBalance,
               }
 
               setUser(data)
@@ -180,6 +186,7 @@ function AuthProvider({ children }: ContextProps) {
                   password: password,
                   pin: snapshot.val().pin,
                   accountType: snapshot.val().accountType,
+                  accountBalance: snapshot.val().accountBalance,
                 }
 
                 setUser(data)
