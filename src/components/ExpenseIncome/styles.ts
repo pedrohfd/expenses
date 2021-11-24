@@ -14,12 +14,15 @@ export const Container = styled(SafeAreaView)`
 export const CategoryPicker = styled.TouchableOpacity`
   height: 56px;
   padding-left: 16px;
+  padding-right: 16px;
 
   border-radius: 16px;
   border-width: 1px;
   border-color: ${colors.light_60};
 
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `
 
 export const CategoryPickerText = styled.Text`
@@ -47,12 +50,15 @@ export const DescriptionInput = styled.TextInput`
 export const WalletPicker = styled.TouchableOpacity`
   height: 56px;
   padding-left: 16px;
+  padding-right: 16px;
 
   border-radius: 16px;
   border-width: 1px;
   border-color: ${colors.light_60};
 
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 
   margin-top: 16px;
 `
@@ -162,9 +168,12 @@ export const FrequencyPicker = styled.TouchableOpacity`
 
   margin: 24px 16px 0;
 
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 
   padding-left: 16px;
+  padding-right: 16px;
 
   border-width: 1px;
   border-radius: 16px;
@@ -182,9 +191,12 @@ export const EndPicker = styled.TouchableOpacity`
 
   margin: 24px 16px 0;
 
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 
   padding-left: 16px;
+  padding-right: 16px;
 
   border-width: 1px;
   border-radius: 16px;
@@ -195,4 +207,24 @@ export const EndPickerText = styled.Text`
   color: ${colors.light_20};
   font-size: 16px;
   font-family: ${fonts.medium};
+`
+
+export const NextButton = styled.TouchableOpacity`
+  height: 56px;
+
+  justify-content: center;
+  align-items: center;
+
+  background: ${colors.violet_100};
+
+  margin: 24px 16px 0;
+
+  border-radius: 16px;
+`
+
+export const NextButtonText = styled.Text`
+  font-size: 18px;
+  font-family: ${fonts.semiBold};
+
+  color: ${colors.light_80};
 `

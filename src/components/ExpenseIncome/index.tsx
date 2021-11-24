@@ -3,6 +3,7 @@ import Modal from 'react-native-modal'
 import ToggleSwitch from 'toggle-switch-react-native'
 
 import AttachmentIcon from '../../assets/icons/attachment.svg'
+import ArrowDownIcon from '../../assets/icons/arrow-down-2.svg'
 import { colors } from '../../styles/colors'
 import {
   AddAttachmentButton,
@@ -18,6 +19,8 @@ import {
   FrequencyPicker,
   FrequencyPickerText,
   ModalContent,
+  NextButton,
+  NextButtonText,
   RepeatButtonArea,
   RepeatButtonSubtitle,
   RepeatButtonTextArea,
@@ -34,12 +37,16 @@ export function ExpenseIncome() {
     <Container>
       <CategoryPicker>
         <CategoryPickerText>Categoria</CategoryPickerText>
+
+        <ArrowDownIcon height={32} width={32} />
       </CategoryPicker>
 
       <DescriptionInput placeholder='Descrição' />
 
       <WalletPicker>
         <WalletPickerText>Carteira</WalletPickerText>
+
+        <ArrowDownIcon height={32} width={32} />
       </WalletPicker>
 
       <AddAttachmentButton>
@@ -88,11 +95,19 @@ export function ExpenseIncome() {
 
           <FrequencyPicker>
             <FrequencyPickerText>Frequência</FrequencyPickerText>
+
+            <ArrowDownIcon height={32} width={32} />
           </FrequencyPicker>
 
           <EndPicker>
             <EndPickerText>Término</EndPickerText>
+
+            <ArrowDownIcon height={32} width={32} />
           </EndPicker>
+
+          <NextButton>
+            <NextButtonText>Próximo</NextButtonText>
+          </NextButton>
         </ModalContent>
       </Modal>
     </Container>
