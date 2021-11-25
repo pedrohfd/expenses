@@ -13,8 +13,95 @@ interface User {
   name: string
   uid: string
   pin: string
-  accountType: string
-  accountBalance: number
+  balance: {
+    totalAccountBalance: number
+    0: {
+      income: number
+      expenses: number
+    }
+    1: {
+      income: number
+      expenses: number
+    }
+    2: {
+      income: number
+      expenses: number
+    }
+    3: {
+      income: number
+      expenses: number
+    }
+    4: {
+      income: number
+      expenses: number
+    }
+    5: {
+      income: number
+      expenses: number
+    }
+    6: {
+      income: number
+      expenses: number
+    }
+    7: {
+      income: number
+      expenses: number
+    }
+    8: {
+      income: number
+      expenses: number
+    }
+    9: {
+      income: number
+      expenses: number
+    }
+    10: {
+      income: number
+      expenses: number
+    }
+    11: {
+      income: number
+      expenses: number
+    }
+  }
+  accountType: {
+    'Banco Inter': {
+      accountBalance: number
+      name: string
+    }
+    'Banco do Brasil': {
+      accountBalance: number
+      name: string
+    }
+    Bradesco: {
+      accountBalance: number
+      name: string
+    }
+    Itau: {
+      accountBalance: number
+      name: string
+    }
+    Santander: {
+      accountBalance: number
+      name: string
+    }
+    'C6 Bank': {
+      accountBalance: number
+      name: string
+    }
+    'Caixa Econômica': {
+      accountBalance: number
+      name: string
+    }
+    Nubank: {
+      accountBalance: number
+      name: string
+    }
+    wallet: {
+      accountBalance: number
+      name: string
+    }
+  }
 }
 
 interface UserCredentials {
@@ -77,7 +164,7 @@ function AuthProvider({ children }: ContextProps) {
             password: snapshot.val().password,
             pin: snapshot.val().pin,
             accountType: snapshot.val().accountType,
-            accountBalance: snapshot.val().accountBalance,
+            balance: snapshot.val().balance,
           }
 
           setUser(data)
@@ -94,12 +181,71 @@ function AuthProvider({ children }: ContextProps) {
   async function saveAccountType(accountType: string) {
     const { uid } = user as User
 
-    await database.ref('users').child(uid).update({
-      accountType: accountType,
-      accountBalance: 0,
-    })
+    await database
+      .ref('users')
+      .child(uid)
+      .child('balance')
+      .update({
+        totalAccountBalance: 0,
+        0: {
+          income: 0,
+          expenses: 0,
+        },
+        1: {
+          income: 0,
+          expenses: 0,
+        },
+        2: {
+          income: 0,
+          expenses: 0,
+        },
+        3: {
+          income: 0,
+          expenses: 0,
+        },
+        4: {
+          income: 0,
+          expenses: 0,
+        },
+        5: {
+          income: 0,
+          expenses: 0,
+        },
+        6: {
+          income: 0,
+          expenses: 0,
+        },
+        7: {
+          income: 0,
+          expenses: 0,
+        },
+        8: {
+          income: 0,
+          expenses: 0,
+        },
+        9: {
+          income: 0,
+          expenses: 0,
+        },
+        10: {
+          income: 0,
+          expenses: 0,
+        },
+        11: {
+          income: 0,
+          expenses: 0,
+        },
+      })
 
-    // await database.ref('users').child(uid).child(accountType)
+    await database
+      .ref('users')
+      .child(uid)
+      .child('accountType')
+      .child(accountType)
+      .update({
+        name: accountType,
+        accountBalance: 0,
+      })
   }
 
   async function savePin() {
@@ -133,7 +279,7 @@ function AuthProvider({ children }: ContextProps) {
                 password: password,
                 pin: snapshot.val().pin,
                 accountType: snapshot.val().accountType,
-                accountBalance: snapshot.val().accountBalance,
+                balance: snapshot.val().balance,
               }
 
               setUser(data)
@@ -186,7 +332,7 @@ function AuthProvider({ children }: ContextProps) {
                   password: password,
                   pin: snapshot.val().pin,
                   accountType: snapshot.val().accountType,
-                  accountBalance: snapshot.val().accountBalance,
+                  balance: snapshot.val().balance,
                 }
 
                 setUser(data)

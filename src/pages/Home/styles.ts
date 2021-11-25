@@ -11,7 +11,7 @@ interface ContainerProps {
 }
 
 export const StatusBarColor = styled.View<ContainerProps>`
-  height: ${props => props.height};
+  height: ${props => props.height + 'px'};
   background: #fff6e5;
 `
 
@@ -50,6 +50,31 @@ export const MonthText = styled.Text`
 
   color: ${colors.dark_50};
 `
+
+export const ModalContent = styled.View`
+  background: ${colors.light_80};
+
+  border-radius: 16px;
+
+  align-items: center;
+
+  padding-top: 16px;
+`
+
+export const ModalMonthButton = styled.TouchableOpacity`
+  height: 40px;
+  width: 90%;
+
+  justify-content: center;
+  align-items: center;
+
+  background: ${colors.light_60};
+
+  margin-bottom: 16px;
+  border-radius: 10px;
+`
+
+export const ModalMonthButtonText = styled.Text``
 
 export const NotificationButton = styled.TouchableOpacity``
 

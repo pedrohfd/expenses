@@ -105,7 +105,6 @@ export function AddNewAccount() {
           >
             <Picker.Item label='Tipo de conta' />
             <Picker.Item label='Banco' value='banco' />
-            <Picker.Item label='Cartão de Crédito' value='cartão' />
             <Picker.Item label='Carteira' value='carteira' />
           </Picker>
         </PickerArea>

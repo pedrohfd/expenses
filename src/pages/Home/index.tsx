@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react'
 import { Dimensions } from 'react-native'
 import { LineChart } from 'react-native-chart-kit'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { getMonth } from 'date-fns'
+import Modal from 'react-native-modal'
 
 import ExpensesIcon from '../../assets/icons/expenses.svg'
 import IncomeIcon from '../../assets/icons/income.svg'
@@ -31,6 +33,9 @@ import {
   IncomeTextArea,
   IncomeTitle,
   IncomeValue,
+  ModalContent,
+  ModalMonthButton,
+  ModalMonthButtonText,
   MonthButton,
   MonthText,
   NotificationButton,
@@ -69,6 +74,7 @@ let labels = todayLabels
 export function Home() {
   const [from, setFrom] = useState(16)
   const [animate, setAnimate] = useState(16)
+  const [isModalVisible, setIsModalVisible] = useState(false)
   const [buttonPressed, setButtonPressed] = useState({
     today: true,
     week: false,
@@ -78,14 +84,16 @@ export function Home() {
 
   const { user } = useContext(AuthContext)
 
-  const accountBalance = user?.accountBalance
+  const totalAccountBalance = user?.balance.totalAccountBalance
+
+  const result = getMonth(new Date())
 
   const insets = useSafeAreaInsets().top
 
-  const today = 16
-  const week = 110
-  const month = 206
-  const year = 300
+  const todayChart = 16
+  const weekChart = 110
+  const monthChart = 206
+  const yearChart = 300
 
   function handleSelectedChart(animate: number) {
     setFrom(animate)
@@ -100,10 +108,54 @@ export function Home() {
           <HeaderItems>
             <Avatar />
 
-            <MonthButton>
+            <MonthButton onPress={() => setIsModalVisible(true)}>
               <ArrowDownIcon height={24} width={24} />
               <MonthText>Outubro</MonthText>
             </MonthButton>
+
+            <Modal
+              isVisible={isModalVisible}
+              onBackdropPress={() => setIsModalVisible(false)}
+            >
+              <ModalContent>
+                <ModalMonthButton>
+                  <ModalMonthButtonText>Janeiro</ModalMonthButtonText>
+                </ModalMonthButton>
+                <ModalMonthButton>
+                  <ModalMonthButtonText>Fevereiro</ModalMonthButtonText>
+                </ModalMonthButton>
+                <ModalMonthButton>
+                  <ModalMonthButtonText>Março</ModalMonthButtonText>
+                </ModalMonthButton>
+                <ModalMonthButton>
+                  <ModalMonthButtonText>Abril</ModalMonthButtonText>
+                </ModalMonthButton>
+                <ModalMonthButton>
+                  <ModalMonthButtonText>Maio</ModalMonthButtonText>
+                </ModalMonthButton>
+                <ModalMonthButton>
+                  <ModalMonthButtonText>Junho</ModalMonthButtonText>
+                </ModalMonthButton>
+                <ModalMonthButton>
+                  <ModalMonthButtonText>Julho</ModalMonthButtonText>
+                </ModalMonthButton>
+                <ModalMonthButton>
+                  <ModalMonthButtonText>Agosto</ModalMonthButtonText>
+                </ModalMonthButton>
+                <ModalMonthButton>
+                  <ModalMonthButtonText>Setembro</ModalMonthButtonText>
+                </ModalMonthButton>
+                <ModalMonthButton>
+                  <ModalMonthButtonText>Outubro</ModalMonthButtonText>
+                </ModalMonthButton>
+                <ModalMonthButton>
+                  <ModalMonthButtonText>Novembro</ModalMonthButtonText>
+                </ModalMonthButton>
+                <ModalMonthButton>
+                  <ModalMonthButtonText>Dezembro</ModalMonthButtonText>
+                </ModalMonthButton>
+              </ModalContent>
+            </Modal>
 
             <NotificationButton>
               <NotificationIcon height={32} width={32} />
@@ -111,7 +163,7 @@ export function Home() {
           </HeaderItems>
 
           <BalanceTitle>Saldo da conta</BalanceTitle>
-          <Balance>R$ {accountBalance}</Balance>
+          <Balance>R$ {totalAccountBalance}</Balance>
 
           <Summary>
             <Income>
@@ -120,7 +172,7 @@ export function Home() {
               <IncomeTextArea>
                 <IncomeTitle>Renda</IncomeTitle>
 
-                <IncomeValue>$5000</IncomeValue>
+                <IncomeValue>R$5000</IncomeValue>
               </IncomeTextArea>
             </Income>
 
@@ -130,7 +182,7 @@ export function Home() {
               <ExpensesTextArea>
                 <ExpensesTitle>Despesas</ExpensesTitle>
 
-                <ExpensesValue>$1200</ExpensesValue>
+                <ExpensesValue>R$1200</ExpensesValue>
               </ExpensesTextArea>
             </Expenses>
           </Summary>
@@ -182,7 +234,7 @@ export function Home() {
             onPress={() => {
               data = todayData
               labels = todayLabels
-              handleSelectedChart(today)
+              handleSelectedChart(todayChart)
               setButtonPressed({
                 today: true,
                 week: false,
@@ -200,7 +252,7 @@ export function Home() {
             onPress={() => {
               data = weekData
               labels = weekLabels
-              handleSelectedChart(week)
+              handleSelectedChart(weekChart)
               setButtonPressed({
                 today: false,
                 week: true,
@@ -217,7 +269,7 @@ export function Home() {
           <ChartFilterButton
             onPress={() => {
               data = monthData
-              handleSelectedChart(month)
+              handleSelectedChart(monthChart)
               setButtonPressed({
                 today: false,
                 week: false,
@@ -235,7 +287,7 @@ export function Home() {
             onPress={() => {
               data = yearData
               labels = yearLabels
-              handleSelectedChart(year)
+              handleSelectedChart(yearChart)
               setButtonPressed({
                 today: false,
                 week: false,
