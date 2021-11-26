@@ -120,7 +120,10 @@ export const Income = styled.View`
   justify-content: space-between;
 `
 
-export const IncomeTextArea = styled.View``
+export const IncomeTextArea = styled.View`
+  flex: 1;
+  margin-left: 10px;
+`
 
 export const IncomeTitle = styled.Text`
   color: ${colors.light_80};
@@ -150,7 +153,10 @@ export const Expenses = styled.View`
   justify-content: space-between;
 `
 
-export const ExpensesTextArea = styled.View``
+export const ExpensesTextArea = styled.View`
+  flex: 1;
+  margin-left: 10px;
+`
 
 export const ExpensesTitle = styled.Text`
   color: ${colors.light_80};

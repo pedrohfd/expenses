@@ -97,7 +97,7 @@ interface User {
       accountBalance: number
       name: string
     }
-    wallet: {
+    Wallet: {
       accountBalance: number
       name: string
     }

@@ -19,10 +19,28 @@ export const Title = styled.Text`
   opacity: 0.64;
 `
 
+export const ExpenseArea = styled.View`
+  flex-direction: row;
+  align-items: center;
+`
 export const Expense = styled.Text`
   margin-top: 13px;
   margin-left: 26px;
   margin-bottom: 16px;
+
+  font-size: 64px;
+  font-family: ${fonts.semiBold};
+
+  color: ${colors.light_80};
+`
+
+export const ExpenseValue = styled.TextInput`
+  margin-top: 13px;
+  margin-left: 2px;
+  margin-bottom: 16px;
+  margin-right: 16px;
+
+  flex: 1;
 
   font-size: 64px;
   font-family: ${fonts.semiBold};

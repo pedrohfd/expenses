@@ -9,9 +9,14 @@ export const Container = styled.View`
   padding: 16px;
 `
 
-export const Icon = styled.View`
+export const IconArea = styled.View`
   height: 60px;
   width: 60px;
+
+  border-radius: 16px;
+
+  justify-content: center;
+  align-items: center;
 
   background: ${colors.yellow_20};
 `

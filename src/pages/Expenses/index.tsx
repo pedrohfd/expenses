@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ExpenseIncome } from '../../components/ExpenseIncome'
 import { Header } from '../../components/Header'
 import { colors } from '../../styles/colors'
-import { Container, Title, Expense } from './styles'
+import { Container, Title, Expense, ExpenseValue, ExpenseArea } from './styles'
 
 export function Expenses() {
+  const [value, setValue] = useState('0')
+
   return (
     <Container>
       <Header
@@ -15,7 +17,15 @@ export function Expenses() {
 
       <Title>Quanto custa?</Title>
 
-      <Expense>R$ 0</Expense>
+      <ExpenseArea>
+        <Expense>R$</Expense>
+        <ExpenseValue
+          value={value}
+          onChangeText={text => setValue(text)}
+          keyboardType='numeric'
+          defaultValue={value}
+        />
+      </ExpenseArea>
 
       <ExpenseIncome />
     </Container>

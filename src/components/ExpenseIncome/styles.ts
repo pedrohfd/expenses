@@ -3,7 +3,11 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { colors } from '../../styles/colors'
 import fonts from '../../styles/fonts'
 
-export const Container = styled(SafeAreaView)`
+interface CategoryItemColor {
+  color: string
+}
+
+export const Container = styled.View`
   background: ${colors.light_100};
   padding: 0 16px;
 
@@ -11,10 +15,55 @@ export const Container = styled(SafeAreaView)`
   border-top-right-radius: 32px;
 `
 
+export const CategorySelected = styled.View`
+  height: 56px;
+  padding-left: 16px;
+  padding-right: 16px;
+
+  margin-top: 24px;
+
+  border-radius: 16px;
+  border-width: 1px;
+  border-color: ${colors.light_60};
+
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`
+
+export const CategorySelectedItemColor = styled.View<CategoryItemColor>`
+  background: ${props => props.color};
+  height: 14px;
+  width: 14px;
+
+  border-radius: 7px;
+`
+
+export const CategorySelectedItemButton = styled.TouchableOpacity`
+  flex-direction: row;
+
+  height: 33px;
+
+  align-items: center;
+
+  border-color: ${colors.light_60};
+  border-width: 1px;
+  border-radius: 32px;
+
+  padding-left: 8px;
+`
+
+export const CategorySelectedItemText = styled.Text`
+  margin-left: 7px;
+  margin-right: 16px;
+`
+
 export const CategoryPicker = styled.TouchableOpacity`
   height: 56px;
   padding-left: 16px;
   padding-right: 16px;
+
+  margin-top: 24px;
 
   border-radius: 16px;
   border-width: 1px;
@@ -29,6 +78,33 @@ export const CategoryPickerText = styled.Text`
   font-size: 16px;
   font-family: ${fonts.medium};
   color: ${colors.light_20};
+`
+
+export const ModalCategoryContent = styled.View`
+  background: ${colors.light_100};
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  border-radius: 32px;
+`
+
+export const ModalCategorySelectionButton = styled.TouchableOpacity<CategoryItemColor>`
+  height: 80px;
+  width: 80px;
+
+  background: ${props => props.color};
+
+  margin: 21.7px;
+
+  border-radius: 16px;
+
+  justify-content: center;
+  align-items: center;
+`
+
+export const ModalCategorySelectionButtonText = styled.Text<CategoryItemColor>`
+  font-family: ${fonts.semiBold};
+  color: ${props => props.color};
 `
 
 export const DescriptionInput = styled.TextInput`
@@ -68,6 +144,12 @@ export const WalletPickerText = styled.Text`
   font-family: ${fonts.medium};
   color: ${colors.light_20};
 `
+
+export const ModalWalletContent = styled.View``
+
+export const ModalWalletButton = styled.TouchableOpacity``
+
+export const ModalWalletButtonText = styled.Text``
 
 export const AddAttachmentButton = styled.TouchableOpacity`
   flex-direction: row;

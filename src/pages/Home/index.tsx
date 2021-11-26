@@ -67,14 +67,31 @@ const yearLabels = ['Jan', 'Mar', 'Mai', 'Jul', 'Set', 'Nov']
 
 const yearData = [150, 50, 30, 100, 23, 65, 56, 100, 21, 23, 54, 47]
 
+const months = {
+  0: 'Janeiro',
+  1: 'Fevereiro',
+  2: 'Março',
+  3: 'Abril',
+  4: 'Maio',
+  5: 'Junho',
+  6: 'Julho',
+  7: 'Agosto',
+  8: 'Setembro',
+  9: 'Outubro',
+  10: 'Novembro',
+  11: 'Dezembro',
+}
+
 let data = todayData
 
 let labels = todayLabels
 
 export function Home() {
+  const result = getMonth(new Date())
   const [from, setFrom] = useState(16)
   const [animate, setAnimate] = useState(16)
   const [isModalVisible, setIsModalVisible] = useState(false)
+  const [month, setMonth] = useState<number>(result)
   const [buttonPressed, setButtonPressed] = useState({
     today: true,
     week: false,
@@ -86,7 +103,9 @@ export function Home() {
 
   const totalAccountBalance = user?.balance.totalAccountBalance
 
-  const result = getMonth(new Date())
+  const income = user?.balance[month].income
+
+  const expenses = user?.balance[month].expenses
 
   const insets = useSafeAreaInsets().top
 
@@ -110,7 +129,7 @@ export function Home() {
 
             <MonthButton onPress={() => setIsModalVisible(true)}>
               <ArrowDownIcon height={24} width={24} />
-              <MonthText>Outubro</MonthText>
+              <MonthText>{months[month]}</MonthText>
             </MonthButton>
 
             <Modal
@@ -118,40 +137,100 @@ export function Home() {
               onBackdropPress={() => setIsModalVisible(false)}
             >
               <ModalContent>
-                <ModalMonthButton>
+                <ModalMonthButton
+                  onPress={() => {
+                    setMonth(0)
+                    setIsModalVisible(false)
+                  }}
+                >
                   <ModalMonthButtonText>Janeiro</ModalMonthButtonText>
                 </ModalMonthButton>
-                <ModalMonthButton>
+                <ModalMonthButton
+                  onPress={() => {
+                    setMonth(1)
+                    setIsModalVisible(false)
+                  }}
+                >
                   <ModalMonthButtonText>Fevereiro</ModalMonthButtonText>
                 </ModalMonthButton>
-                <ModalMonthButton>
+                <ModalMonthButton
+                  onPress={() => {
+                    setMonth(2)
+                    setIsModalVisible(false)
+                  }}
+                >
                   <ModalMonthButtonText>Março</ModalMonthButtonText>
                 </ModalMonthButton>
-                <ModalMonthButton>
+                <ModalMonthButton
+                  onPress={() => {
+                    setMonth(3)
+                    setIsModalVisible(false)
+                  }}
+                >
                   <ModalMonthButtonText>Abril</ModalMonthButtonText>
                 </ModalMonthButton>
-                <ModalMonthButton>
+                <ModalMonthButton
+                  onPress={() => {
+                    setMonth(4)
+                    setIsModalVisible(false)
+                  }}
+                >
                   <ModalMonthButtonText>Maio</ModalMonthButtonText>
                 </ModalMonthButton>
-                <ModalMonthButton>
+                <ModalMonthButton
+                  onPress={() => {
+                    setMonth(5)
+                    setIsModalVisible(false)
+                  }}
+                >
                   <ModalMonthButtonText>Junho</ModalMonthButtonText>
                 </ModalMonthButton>
-                <ModalMonthButton>
+                <ModalMonthButton
+                  onPress={() => {
+                    setMonth(6)
+                    setIsModalVisible(false)
+                  }}
+                >
                   <ModalMonthButtonText>Julho</ModalMonthButtonText>
                 </ModalMonthButton>
-                <ModalMonthButton>
+                <ModalMonthButton
+                  onPress={() => {
+                    setMonth(7)
+                    setIsModalVisible(false)
+                  }}
+                >
                   <ModalMonthButtonText>Agosto</ModalMonthButtonText>
                 </ModalMonthButton>
-                <ModalMonthButton>
+                <ModalMonthButton
+                  onPress={() => {
+                    setMonth(8)
+                    setIsModalVisible(false)
+                  }}
+                >
                   <ModalMonthButtonText>Setembro</ModalMonthButtonText>
                 </ModalMonthButton>
-                <ModalMonthButton>
+                <ModalMonthButton
+                  onPress={() => {
+                    setMonth(9)
+                    setIsModalVisible(false)
+                  }}
+                >
                   <ModalMonthButtonText>Outubro</ModalMonthButtonText>
                 </ModalMonthButton>
-                <ModalMonthButton>
+                <ModalMonthButton
+                  onPress={() => {
+                    setMonth(10)
+                    setIsModalVisible(false)
+                  }}
+                >
                   <ModalMonthButtonText>Novembro</ModalMonthButtonText>
                 </ModalMonthButton>
-                <ModalMonthButton>
+                <ModalMonthButton
+                  onPress={() => {
+                    setMonth(11)
+                    setIsModalVisible(false)
+                  }}
+                >
                   <ModalMonthButtonText>Dezembro</ModalMonthButtonText>
                 </ModalMonthButton>
               </ModalContent>
@@ -172,7 +251,7 @@ export function Home() {
               <IncomeTextArea>
                 <IncomeTitle>Renda</IncomeTitle>
 
-                <IncomeValue>R$5000</IncomeValue>
+                <IncomeValue>R${income}</IncomeValue>
               </IncomeTextArea>
             </Income>
 
@@ -182,7 +261,7 @@ export function Home() {
               <ExpensesTextArea>
                 <ExpensesTitle>Despesas</ExpensesTitle>
 
-                <ExpensesValue>R$1200</ExpensesValue>
+                <ExpensesValue>R${expenses}</ExpensesValue>
               </ExpensesTextArea>
             </Expenses>
           </Summary>
