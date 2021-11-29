@@ -3,6 +3,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/core'
 import * as AuthSession from 'expo-auth-session'
+import uuid from 'react-native-uuid'
 
 import { auth, database } from '../config'
 import { AuthStackParamList } from '../pages/RootStackParams'
@@ -65,39 +66,7 @@ interface User {
     }
   }
   accountType: {
-    'Banco Inter': {
-      accountBalance: number
-      name: string
-    }
-    'Banco do Brasil': {
-      accountBalance: number
-      name: string
-    }
-    Bradesco: {
-      accountBalance: number
-      name: string
-    }
-    Itau: {
-      accountBalance: number
-      name: string
-    }
-    Santander: {
-      accountBalance: number
-      name: string
-    }
-    'C6 Bank': {
-      accountBalance: number
-      name: string
-    }
-    'Caixa Econômica': {
-      accountBalance: number
-      name: string
-    }
-    Nubank: {
-      accountBalance: number
-      name: string
-    }
-    Wallet: {
+    id: {
       accountBalance: number
       name: string
     }
@@ -123,6 +92,7 @@ interface AuthContextProps {
   saveAccountType: (accountType: string) => {}
   toggleModal: () => void
   isModalVisible: boolean
+  account: string
 }
 
 interface ContextProps {
@@ -144,6 +114,7 @@ function AuthProvider({ children }: ContextProps) {
   const [user, setUser] = useState<User | null>(null)
   const [pin, setPin] = useState('')
   const [isModalVisible, setIsModalVisible] = useState(false)
+  const [account, setAccount] = useState('')
   const navigation = useNavigation<authScreenProp>()
 
   useEffect(() => {
@@ -180,6 +151,8 @@ function AuthProvider({ children }: ContextProps) {
 
   async function saveAccountType(accountType: string) {
     const { uid } = user as User
+
+    setAccount(accountType)
 
     await database
       .ref('users')
@@ -428,6 +401,7 @@ function AuthProvider({ children }: ContextProps) {
         saveAccountType,
         toggleModal,
         isModalVisible,
+        account
       }}
     >
       {children}

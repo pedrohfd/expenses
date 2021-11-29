@@ -133,7 +133,7 @@ const StackRoutes = createStackNavigator<AppStackParamList>()
 
 export function PinRoutes() {
   return (
-    <StackRoutes.Navigator>
+    <StackRoutes.Navigator screenOptions={{ headerShown: false }}>
       <StackRoutes.Screen name='PinSetup' component={PinSetup} />
       <StackRoutes.Screen
         name='PinConfirmation'

@@ -81,17 +81,6 @@ export function AddNewAccount() {
       <Balance>$00.0</Balance>
 
       <BottomArea>
-        <NameArea>
-          {selectedType === 'banco' ? (
-            <BankName>{bankSelected}</BankName>
-          ) : (
-            <NameInput
-              placeholder='Nome'
-              onChangeText={text => setName(text)}
-            />
-          )}
-        </NameArea>
-
         <PickerArea>
           <Picker
             style={{
@@ -197,6 +186,17 @@ export function AddNewAccount() {
         ) : (
           <></>
         )}
+
+        <NameArea>
+          {selectedType === 'banco' ? (
+            <BankName>{bankSelected}</BankName>
+          ) : (
+            <NameInput
+              placeholder='Nome'
+              onChangeText={text => setName(text)}
+            />
+          )}
+        </NameArea>
 
         <Button onPress={handleContinue}>
           <ButtonText>Continue</ButtonText>

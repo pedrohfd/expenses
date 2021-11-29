@@ -45,7 +45,6 @@ import {
   WalletPickerText,
 } from './styles'
 import { AuthContext } from '../../context/auth'
-import { useTheme } from 'styled-components'
 
 interface CategoryProps {
   name: string
@@ -55,10 +54,13 @@ interface CategoryProps {
 export function ExpenseIncome() {
   const [isRepeatable, setIsRepeatable] = useState(false)
   const [isCategoryModalVisible, setIsCategoryModalVisible] = useState(false)
+  const [isWalletModalVisible, setIsWalletModalVisible] = useState(false)
   const [description, setDescription] = useState('')
   const [category, setCategory] = useState<CategoryProps | null>(null)
 
-  const { user } = useContext(AuthContext)
+  const { user, account } = useContext(AuthContext)
+
+  const acc = user?.accountType
 
   return (
     <Container>
@@ -174,17 +176,21 @@ export function ExpenseIncome() {
         value={description}
       />
 
-      <WalletPicker>
+      <WalletPicker onPress={() => console.log(acc)}>
         <WalletPickerText>Carteira</WalletPickerText>
 
         <ArrowDownIcon height={32} width={32} />
       </WalletPicker>
 
-      <Modal>
+      <Modal
+        isVisible={isWalletModalVisible}
+        onBackdropPress={() => setIsWalletModalVisible(false)}
+      >
         <ModalWalletContent>
-          {user?.accountType}
           <ModalWalletButton>
-            <ModalWalletButtonText></ModalWalletButtonText>
+            <ModalWalletButtonText>
+              {/* {user?.accountType.id.name} */}
+            </ModalWalletButtonText>
           </ModalWalletButton>
         </ModalWalletContent>
       </Modal>

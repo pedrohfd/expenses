@@ -45,7 +45,7 @@ export const BottomArea = styled.View`
 
 export const NameArea = styled.View`
   justify-content: center;
-  margin-top: 24px;
+  margin-top: 16px;
 
   height: 56px;
 
@@ -84,7 +84,7 @@ export const PickerArea = styled.View`
   border-color: ${colors.light_60};
   border-radius: 16px;
 
-  margin-top: 16px;
+  margin-top: 24px;
 `
 
 export const Button = styled.TouchableOpacity`
